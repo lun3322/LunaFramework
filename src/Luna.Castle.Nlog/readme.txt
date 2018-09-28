@@ -1,7 +1,6 @@
 ﻿使用方法:
 
-1.设置NLog.config编译时复制到输出目录
-2.在Main方法中新增代码
+1.在Main方法中新增代码
 using (var starter = Starter.Create<Runner>())
 {
 	starter.Container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
@@ -9,7 +8,7 @@ using (var starter = Starter.Create<Runner>())
 	starter.Run();
 }
 
-3.新增Runner类继承LunaRunnerBase
+2.新增Runner类继承LunaRunnerBase
 
 注意: 项目要遵循aaa.bb.c命名规则.例如
 Demo.App        <- 应用程序入口

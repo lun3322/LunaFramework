@@ -1,0 +1,10 @@
+﻿<Project>
+  <PropertyGroup>
+    <Version>0.1.6</Version>
+    <Authors>chenhongbo</Authors>
+    <PackageLicenseUrl>https://github.com/lun3322/LunaFramework</PackageLicenseUrl>
+    
+    <PackageOutputPath>..\..\package\</PackageOutputPath>
+  </PropertyGroup>
+
+</Project>
