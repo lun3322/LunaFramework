@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Luna.Core\Luna.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\Luna.Web\Luna.Web.csproj" />
+    <ProjectReference Include="..\DemoApp.Service\DemoApp.Service.csproj" />
+  </ItemGroup>
+
+</Project>

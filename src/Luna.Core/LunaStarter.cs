@@ -7,12 +7,12 @@ using Luna.Dependency;
 
 namespace Luna
 {
-    public class Starter : IDisposable
+    public class LunaStarter : IDisposable
     {
         private ILogger Logger { get; set; }
         public IIocManager IocManager { get; private set; }
 
-        private Starter(Type entryType, StarterOption option)
+        private LunaStarter(Type entryType, LunaStarterOption option)
         {
             IocManager = option.IocManager;
 
@@ -20,10 +20,10 @@ namespace Luna
             IocManager.RegisterAssemblyByConvention(entryType.Assembly);
         }
 
-        public static Starter Create<T>(StarterOption option = null)
+        public static LunaStarter Create<T>(LunaStarterOption option = null)
             where T : class
         {
-            return new Starter(typeof(T), option ?? new StarterOption());
+            return new LunaStarter(typeof(T), option ?? new LunaStarterOption());
         }
 
         public void Initialize()

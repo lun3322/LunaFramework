@@ -9,7 +9,7 @@ namespace DemoApp.Core
     {
         static void Main(string[] args)
         {
-            using (var starter = Starter.Create<Program>())
+            using (var starter = LunaStarter.Create<Program>())
             {
                 starter.IocManager.IocContainer.AddFacility<LoggingFacility>(m =>
                     m.LogUsing<NLogFactory>().WithConfig("NLog.config"));

@@ -2,11 +2,11 @@
 
 namespace Luna
 {
-    public class StarterOption
+    public class LunaStarterOption
     {
         public IocManager IocManager { get; }
 
-        public StarterOption()
+        public LunaStarterOption()
         {
             IocManager = IocManager.Instance;
         }

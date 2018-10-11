@@ -15,15 +15,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Castle.Nlog", "src\Lun
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DemoApp", "DemoApp", "{253F5621-72C7-4ACA-B6C4-31608BFC6B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp.Core", "demo\DemoApp\DemoApp.Core\DemoApp.Core.csproj", "{D9518E0A-1ED6-4476-BF78-D690FC5AD151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp.Core", "demo\DemoApp\DemoApp.Core\DemoApp.Core.csproj", "{D9518E0A-1ED6-4476-BF78-D690FC5AD151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp.Service", "demo\DemoApp\DemoApp.Service\DemoApp.Service.csproj", "{4F68869A-5077-4E12-A8B4-90C31328D8EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp.Service", "demo\DemoApp\DemoApp.Service\DemoApp.Service.csproj", "{4F68869A-5077-4E12-A8B4-90C31328D8EE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B9033F1-733E-4A5A-9C4C-8F3B034F286B}"
 	ProjectSection(SolutionItems) = preProject
 		common.props = common.props
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Web", "src\Luna.Web\Luna.Web.csproj", "{872AF27D-2F58-434E-AB72-7ED27BA3364F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp.WebDemo", "demo\DemoApp\DemoApp.WebDemo\DemoApp.WebDemo.csproj", "{A8B11B70-50C7-48B6-B937-4387C448EAB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,14 @@ Global
 		{4F68869A-5077-4E12-A8B4-90C31328D8EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F68869A-5077-4E12-A8B4-90C31328D8EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F68869A-5077-4E12-A8B4-90C31328D8EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872AF27D-2F58-434E-AB72-7ED27BA3364F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872AF27D-2F58-434E-AB72-7ED27BA3364F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872AF27D-2F58-434E-AB72-7ED27BA3364F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872AF27D-2F58-434E-AB72-7ED27BA3364F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B11B70-50C7-48B6-B937-4387C448EAB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B11B70-50C7-48B6-B937-4387C448EAB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B11B70-50C7-48B6-B937-4387C448EAB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B11B70-50C7-48B6-B937-4387C448EAB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +69,8 @@ Global
 		{253F5621-72C7-4ACA-B6C4-31608BFC6B56} = {9F487061-8CA3-4189-8D21-83175120B64E}
 		{D9518E0A-1ED6-4476-BF78-D690FC5AD151} = {253F5621-72C7-4ACA-B6C4-31608BFC6B56}
 		{4F68869A-5077-4E12-A8B4-90C31328D8EE} = {253F5621-72C7-4ACA-B6C4-31608BFC6B56}
+		{872AF27D-2F58-434E-AB72-7ED27BA3364F} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
+		{A8B11B70-50C7-48B6-B937-4387C448EAB2} = {253F5621-72C7-4ACA-B6C4-31608BFC6B56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B76D42F-3CEF-4DB9-9960-27AE2EC91B8F}
