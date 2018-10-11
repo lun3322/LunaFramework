@@ -6,6 +6,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackageId>Luna</PackageId>
     <Product>Luna</Product>
+    <RootNamespace>Luna</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

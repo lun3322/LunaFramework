@@ -9,12 +9,15 @@ namespace DemoApp.Core
     {
         static void Main(string[] args)
         {
-            using (var starter = Starter.Create<Runner>())
+            using (var starter = Starter.Create<Program>())
             {
-                starter.Container.AddFacility<LoggingFacility>(m =>
+                starter.IocManager.IocContainer.AddFacility<LoggingFacility>(m =>
                     m.LogUsing<NLogFactory>().WithConfig("NLog.config"));
 
-                starter.Run();
+                starter.Initialize();
+
+                var runner = starter.IocManager.Resolve<IRunner>();
+                runner.Run();
             }
         }
     }

@@ -9,80 +9,31 @@ namespace Luna
 {
     public class Starter : IDisposable
     {
-        public readonly WindsorContainer Container;
         private ILogger Logger { get; set; }
+        public IIocManager IocManager { get; private set; }
 
-        private Starter(Type runnerType, StarterOption option)
+        private Starter(Type entryType, StarterOption option)
         {
-            Container = new WindsorContainer();
+            IocManager = option.IocManager;
 
-            RegisterAssembly(GetType().Assembly);
-            RegisterAssembly(runnerType.Assembly);
-
-            Container.Register(
-                Component.For<Starter>().Instance(this).LifestyleSingleton(),
-                Component.For<StarterOption>().Instance(option).LifestyleSingleton()
-            );
-
-            IocManager.Container = Container;
-        }
-
-        private void RegisterAssembly(Assembly assembly)
-        {
-            Container.Register(
-                Classes.FromAssemblyInThisApplication(assembly)
-                    .IncludeNonPublicTypes()
-                    .BasedOn<ITransientDependency>()
-                    .WithServiceAllInterfaces()
-                    .If(type => !type.IsGenericTypeDefinition)
-                    .WithService.Self()
-                    .WithService.DefaultInterfaces()
-                    .LifestyleTransient()
-            );
-
-            Container.Register(
-                Classes.FromAssemblyInThisApplication(assembly)
-                    .IncludeNonPublicTypes()
-                    .BasedOn<ISingletonDependency>()
-                    .If(type => !type.IsGenericTypeDefinition)
-                    .WithService.Self()
-                    .WithService.DefaultInterfaces()
-                    .LifestyleSingleton()
-            );
+            IocManager.RegisterAssemblyByConvention(GetType().Assembly);
+            IocManager.RegisterAssemblyByConvention(entryType.Assembly);
         }
 
         public static Starter Create<T>(StarterOption option = null)
-            where T : IRunner
+            where T : class
         {
             return new Starter(typeof(T), option ?? new StarterOption());
         }
 
-        public void Run(bool debug = false)
+        public void Initialize()
         {
-            try
-            {
-                Logger = Container.Kernel.HasComponent(typeof(ILogger))
-                    ? Container.Resolve<ILogger>()
-                    : NullLogger.Instance;
 
-                var runner = Container.Resolve<IRunner>();
-                runner.Init();
-                runner.Run();
-            }
-            catch (Exception ex)
-            {
-                Logger.Warn(ex.ToString());
-                if (debug)
-                {
-                    throw;
-                }
-            }
         }
 
         public void Dispose()
         {
-            Container.Resolve<IRunner>().Stop();
-            Container?.Dispose();
+            IocManager?.Dispose();
         }
     }
 }
