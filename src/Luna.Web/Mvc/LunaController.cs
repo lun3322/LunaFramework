@@ -10,5 +10,10 @@ namespace Luna.Web.Mvc
     public abstract class LunaController : Controller, ITransientDependency
     {
         public ILogger Logger { get; set; }
+
+        protected LunaController()
+        {
+            Logger = NullLogger.Instance;
+        }
     }
 }
