@@ -5,7 +5,7 @@ using Luna.Application;
 
 namespace DemoApp.Service
 {
-    public class DemoService : LunaServiceBase, IDemoService
+    public class DemoService : LunaService, IDemoService
     {
         public string GetMessage()
         {
