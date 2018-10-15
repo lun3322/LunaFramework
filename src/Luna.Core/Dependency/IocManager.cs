@@ -45,6 +45,7 @@ namespace Luna.Dependency
                 Classes.FromAssemblyInThisApplication(assembly)
                     .IncludeNonPublicTypes()
                     .BasedOn<ISingletonDependency>()
+                    .WithServiceAllInterfaces()
                     .If(type => !type.IsGenericTypeDefinition)
                     .WithService.Self()
                     .WithService.DefaultInterfaces()
@@ -55,6 +56,16 @@ namespace Luna.Dependency
         public T Resolve<T>()
         {
             return IocContainer.Resolve<T>();
+        }
+
+        public T[] ResolveAll<T>()
+        {
+            return IocContainer.ResolveAll<T>();
+        }
+
+        public bool IsRegistered<T>()
+        {
+            return IocContainer.Kernel.HasComponent(typeof(T));
         }
 
         public void Dispose()

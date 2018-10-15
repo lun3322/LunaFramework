@@ -9,7 +9,7 @@ namespace Luna
 {
     public class LunaStarter : IDisposable
     {
-        private ILogger Logger { get; set; }
+        private ILogger _logger;
         public IIocManager IocManager { get; private set; }
 
         private LunaStarter(Type entryType, LunaStarterOption option)
@@ -18,6 +18,8 @@ namespace Luna
 
             IocManager.RegisterAssemblyByConvention(GetType().Assembly);
             IocManager.RegisterAssemblyByConvention(entryType.Assembly);
+            
+            _logger = NullLogger.Instance;
         }
 
         public static LunaStarter Create<T>(LunaStarterOption option = null)
@@ -28,12 +30,32 @@ namespace Luna
 
         public void Initialize()
         {
+            ResolveLogger();
 
+            var configurations = IocManager.IocContainer.ResolveAll<ILunaConfiguration>();
+            _logger.Info($"找到 {configurations.Length} 个 LunaConfiguration");
+
+            foreach (var configuration in configurations)
+            {
+                configuration.Initialize();
+            }
+            foreach (var configuration in configurations)
+            {
+                configuration.Setup();
+            }
         }
 
         public void Dispose()
         {
             IocManager?.Dispose();
+        }
+
+        private void ResolveLogger()
+        {
+            if (IocManager.IsRegistered<ILoggerFactory>())
+            {
+                _logger = IocManager.Resolve<ILoggerFactory>().Create(typeof(LunaStarter));
+            }
         }
     }
 }

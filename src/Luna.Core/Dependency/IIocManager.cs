@@ -25,5 +25,19 @@ namespace Luna.Dependency
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         T Resolve<T>();
+
+        /// <summary>
+        /// 获取所有实例
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T[] ResolveAll<T>();
+
+        /// <summary>
+        /// 判断是否已注册进容器
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        bool IsRegistered<T>();
     }
 }
