@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Luna.Pagination
+﻿namespace Luna.Application.Dto
 {
-    public class PagedRequest
+    public class PagedRequestVm
     {
-        public PagedRequest()
+        public PagedRequestVm()
         {
             PageIndex = 1;
             PageSize = 15;
         }
 
-        public PagedRequest(int pageIndex = 1, int pageSize = 15)
+        public PagedRequestVm(int pageIndex = 1, int pageSize = 15)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;

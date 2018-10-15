@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Luna.Pagination
+namespace Luna.Application.Dto
 {
     /// <summary>
     /// 数组返回值
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ResponseList<T>
+    public class ListResponseVm<T>
     {
         /// <summary>
         /// ctor
         /// </summary>
-        public ResponseList()
+        public ListResponseVm()
         {
-            Message = "Ok";
+            Message = "ok";
             Code = 0;
         }
 
@@ -33,24 +33,5 @@ namespace Luna.Pagination
         /// 内容
         /// </summary>
         public List<T> Infos { get; set; }
-    }
-
-    /// <summary>
-    /// 分页返回值
-    /// </summary>
-    public class PagedResponse<T> : ResponseList<T>
-    {
-        /// <summary>
-        /// 页码
-        /// </summary>
-        public int PageIndex { get; set; }
-        /// <summary>
-        /// 每页条数
-        /// </summary>
-        public int PageSize { get; set; }
-        /// <summary>
-        /// 总数
-        /// </summary>
-        public int Total { get; set; }
     }
 }
