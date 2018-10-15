@@ -1,16 +1,9 @@
 ﻿使用方法:
 
-1.在Main方法中新增代码
-using (var starter = Starter.Create<Runner>())
+using (var starter = LunaStarter.Create<Program>())
 {
-	starter.Container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().WithConfig("NLog.config"));
+    starter.IocManager.IocContainer.AddFacility<LoggingFacility>(m =>
+        m.LogUsing<NLogFactory>().WithConfig("NLog.config"));
 
-	starter.Run();
+    starter.Initialize();
 }
-
-2.新增Runner类继承LunaRunnerBase
-
-注意: 项目要遵循aaa.bb.c命名规则.例如
-Demo.App        <- 应用程序入口
-Demo.Service    <- 服务层
-Demo.Entity     <- 实体层
