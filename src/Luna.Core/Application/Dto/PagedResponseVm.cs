@@ -7,7 +7,7 @@ namespace Luna.Application.Dto
     /// <summary>
     /// 分页返回值
     /// </summary>
-    public class PagedResponseVmVm<T> : ListResponseVm<T>
+    public class PagedResponseVm<T> : ListResponseVm<T>
     {
         /// <summary>
         /// 页码

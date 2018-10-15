@@ -2,9 +2,9 @@
 {
     public static class PagedRequestExtensions
     {
-        public static PagedResponseVmVm<T> ToPagedResponse<T>(this PagedRequestVm @this)
+        public static PagedResponseVm<T> ToPagedResponse<T>(this PagedRequestVm @this)
         {
-            return new PagedResponseVmVm<T>
+            return new PagedResponseVm<T>
             {
                 PageIndex = @this.PageIndex,
                 PageSize = @this.PageSize
