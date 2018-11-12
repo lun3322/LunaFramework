@@ -21,13 +21,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp.Service", "demo\Dem
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B9033F1-733E-4A5A-9C4C-8F3B034F286B}"
 	ProjectSection(SolutionItems) = preProject
+		buildpackage.ps1 = buildpackage.ps1
 		common.props = common.props
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Web", "src\Luna.Web\Luna.Web.csproj", "{872AF27D-2F58-434E-AB72-7ED27BA3364F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Web", "src\Luna.Web\Luna.Web.csproj", "{872AF27D-2F58-434E-AB72-7ED27BA3364F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp.WebDemo", "demo\DemoApp\DemoApp.WebDemo\DemoApp.WebDemo.csproj", "{A8B11B70-50C7-48B6-B937-4387C448EAB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp.WebDemo", "demo\DemoApp\DemoApp.WebDemo\DemoApp.WebDemo.csproj", "{A8B11B70-50C7-48B6-B937-4387C448EAB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Core.Tests", "tests\Luna.Core.Tests\Luna.Core.Tests.csproj", "{C3DC4E2D-6EA5-4EE8-89DC-ADFCC2302218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +62,10 @@ Global
 		{A8B11B70-50C7-48B6-B937-4387C448EAB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8B11B70-50C7-48B6-B937-4387C448EAB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8B11B70-50C7-48B6-B937-4387C448EAB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3DC4E2D-6EA5-4EE8-89DC-ADFCC2302218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3DC4E2D-6EA5-4EE8-89DC-ADFCC2302218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3DC4E2D-6EA5-4EE8-89DC-ADFCC2302218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3DC4E2D-6EA5-4EE8-89DC-ADFCC2302218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +78,7 @@ Global
 		{4F68869A-5077-4E12-A8B4-90C31328D8EE} = {253F5621-72C7-4ACA-B6C4-31608BFC6B56}
 		{872AF27D-2F58-434E-AB72-7ED27BA3364F} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
 		{A8B11B70-50C7-48B6-B937-4387C448EAB2} = {253F5621-72C7-4ACA-B6C4-31608BFC6B56}
+		{C3DC4E2D-6EA5-4EE8-89DC-ADFCC2302218} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B76D42F-3CEF-4DB9-9960-27AE2EC91B8F}

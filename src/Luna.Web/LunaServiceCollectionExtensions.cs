@@ -1,5 +1,7 @@
 ﻿using System;
 using Castle.Windsor.MsDependencyInjection;
+using Luna.Web.Mvc.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -13,10 +15,11 @@ namespace Luna.Web
         {
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 
+            services.Configure<MvcOptions>(mvcOpt => { mvcOpt.Configure(); });
+
             var opt = new LunaStarterOption();
             action?.Invoke(opt);
             var start = LunaStarter.Create<TModule>();
-
             services.AddSingleton(start);
 
             return WindsorRegistrationHelper.CreateServiceProvider(start.IocManager.IocContainer, services);
