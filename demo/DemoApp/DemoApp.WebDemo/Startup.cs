@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Castle.Facilities.Logging;
+using Castle.Services.Logging.NLogIntegration;
 using Luna.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace DemoApp.WebDemo
 {
@@ -34,7 +33,11 @@ namespace DemoApp.WebDemo
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            return services.AddLuna<Startup>();
+            return services.AddLuna<Startup>(opt =>
+            {
+                opt.IocManager.IocContainer.AddFacility<LoggingFacility>(m =>
+                    m.LogUsing<NLogFactory>().WithConfig("nlog.config"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

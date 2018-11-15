@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.Core.Logging;
+﻿using Castle.Core.Logging;
 using Luna.Application.Dto;
 using Luna.Dependency;
 using Luna.Web.Mvc.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System;
+using System.Net;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Luna.Web.Mvc.Filters
 {
     public class LunaExceptionFilter : ExceptionFilterAttribute, ITransientDependency
     {
-        public ILogger Logger { get; set; }
+        private readonly ILogger _logger;
 
-        public LunaExceptionFilter()
+        public LunaExceptionFilter(ILogger logger)
         {
-            Logger = NullLogger.Instance;
+            _logger = logger;
         }
 
         public override void OnException(ExceptionContext context)
@@ -30,7 +27,7 @@ namespace Luna.Web.Mvc.Filters
                 return;
             }
 
-            Logger.Error(context.Exception.ToString());
+            _logger.Error(context.Exception.ToString());
             // 判断返回值类型
             if (!IsObjectResult(context.ActionDescriptor.GetMethodInfo().ReturnType))
             {

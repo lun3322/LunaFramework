@@ -23,6 +23,7 @@ namespace DemoApp.WebDemo.Controllers
         [HttpGet]
         public ResponseVm GetVm()
         {
+            Logger.Info("GetVm exception");
             throw new Exception("GetVm exception");
         }
 
