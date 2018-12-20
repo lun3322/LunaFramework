@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Luna.Application.Dto
 {
     /// <summary>
-    /// 数组返回值
+    ///     数组返回值
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ListResponseVm<T> : ResponseVm
+    public class ResponseListVm<T> : ResponseVm
     {
         /// <summary>
-        /// ctor
+        ///     ctor
         /// </summary>
-        public ListResponseVm()
+        public ResponseListVm()
         {
             Message = "ok";
             Code = 0;
         }
 
         /// <summary>
-        /// 内容
+        ///     内容
         /// </summary>
         public List<T> Infos { get; set; }
     }
