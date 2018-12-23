@@ -28,20 +28,22 @@ namespace Luna.Dependency
         public void RegisterAssemblyByConvention(Assembly assembly)
         {
             IocContainer.Register(
-                Classes.FromAssembly(assembly)
+                Classes.FromAssemblyInThisApplication(assembly)
                     .IncludeNonPublicTypes()
                     .BasedOn<ITransientDependency>()
                     .If(type => !type.GetTypeInfo().IsGenericTypeDefinition)
+                    .WithServiceAllInterfaces()
                     .WithService.Self()
                     .WithService.DefaultInterfaces()
                     .LifestyleTransient()
             );
 
             IocContainer.Register(
-                Classes.FromAssembly(assembly)
+                Classes.FromAssemblyInThisApplication(assembly)
                     .IncludeNonPublicTypes()
                     .BasedOn<ISingletonDependency>()
                     .If(type => !type.GetTypeInfo().IsGenericTypeDefinition)
+                    .WithServiceAllInterfaces()
                     .WithService.Self()
                     .WithService.DefaultInterfaces()
                     .LifestyleSingleton()

@@ -9,11 +9,9 @@ namespace Luna.Core.Tests.Repository
         [Fact]
         public void Repository_Is_Registered()
         {
-            var repository = IocManager.Resolve<IRepository>();
             var repository1 = IocManager.Resolve<IRepository<TestEntity>>();
             var repository2 = IocManager.Resolve<IRepository<TestEntity1, long>>();
 
-            repository.ShouldNotBeNull();
             repository1.ShouldNotBeNull();
             repository2.ShouldNotBeNull();
 

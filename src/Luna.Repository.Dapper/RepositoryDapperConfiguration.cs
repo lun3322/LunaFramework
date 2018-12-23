@@ -16,12 +16,12 @@ namespace Luna.Repository
         public override void Initialize()
         {
             _iocManager.IocContainer.Register(
-                Component.For(typeof(DapperRepository<>))
+                Component.For(typeof(IRepository<>))
                     .ImplementedBy(typeof(DapperRepository<>))
                     .LifestyleTransient()
             );
             _iocManager.IocContainer.Register(
-                Component.For(typeof(DapperRepository<,>))
+                Component.For(typeof(IRepository<,>))
                     .ImplementedBy(typeof(DapperRepository<,>))
                     .LifestyleTransient()
             );

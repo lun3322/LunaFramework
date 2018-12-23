@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using DapperExtensions;
+using DapperExtensions.Sql;
 
 namespace Luna.Repository.Dapper
 {
@@ -58,8 +59,7 @@ namespace Luna.Repository.Dapper
 
         public TPrimaryKey Insert(TEntity entity)
         {
-            var newid = DbConnection.Insert(entity);
-            return newid;
+            return DbConnection.Insert(entity);
         }
 
         public async Task<TPrimaryKey> InsertAsync(TEntity entity)
