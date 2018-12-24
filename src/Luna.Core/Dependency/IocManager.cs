@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
@@ -9,10 +6,6 @@ namespace Luna.Dependency
 {
     public class IocManager : IIocManager
     {
-        public static IocManager Instance { get; private set; }
-
-        public IWindsorContainer IocContainer { get; private set; }
-
         static IocManager()
         {
             Instance = new IocManager();
@@ -25,8 +18,12 @@ namespace Luna.Dependency
             IocContainer.Register(
                 Component.For<IocManager, IIocManager>()
                     .UsingFactoryMethod(() => this)
-                );
+            );
         }
+
+        public static IocManager Instance { get; }
+
+        public IWindsorContainer IocContainer { get; }
 
         public void RegisterAssemblyByConvention(Assembly assembly)
         {
@@ -34,8 +31,8 @@ namespace Luna.Dependency
                 Classes.FromAssemblyInThisApplication(assembly)
                     .IncludeNonPublicTypes()
                     .BasedOn<ITransientDependency>()
+                    .If(type => !type.GetTypeInfo().IsGenericTypeDefinition)
                     .WithServiceAllInterfaces()
-                    .If(type => !type.IsGenericTypeDefinition)
                     .WithService.Self()
                     .WithService.DefaultInterfaces()
                     .LifestyleTransient()
@@ -45,8 +42,8 @@ namespace Luna.Dependency
                 Classes.FromAssemblyInThisApplication(assembly)
                     .IncludeNonPublicTypes()
                     .BasedOn<ISingletonDependency>()
+                    .If(type => !type.GetTypeInfo().IsGenericTypeDefinition)
                     .WithServiceAllInterfaces()
-                    .If(type => !type.IsGenericTypeDefinition)
                     .WithService.Self()
                     .WithService.DefaultInterfaces()
                     .LifestyleSingleton()

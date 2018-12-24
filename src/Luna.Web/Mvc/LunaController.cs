@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Castle.Core.Logging;
+﻿using Castle.Core.Logging;
 using Luna.Dependency;
 using Microsoft.AspNetCore.Mvc;
 

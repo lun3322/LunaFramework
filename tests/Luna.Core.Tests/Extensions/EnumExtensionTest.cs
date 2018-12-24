@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 using Luna.Extensions;
 using Shouldly;
 using Xunit;
@@ -23,9 +20,7 @@ namespace Luna.Core.Tests.Extensions
 
     public enum TestEnum
     {
-        [Description("测试1")]
-        T1,
-        [Description("测试2")]
-        T2
+        [Description("测试1")] T1,
+        [Description("测试2")] T2
     }
 }

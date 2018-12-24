@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Caching.Memory;
@@ -27,7 +25,7 @@ namespace Luna.Caching
         {
             if (cacheKey == null) throw new ArgumentNullException(nameof(cacheKey));
             if (cacheValue == null) throw new ArgumentNullException(nameof(cacheValue));
-            
+
             Set(cacheKey, cacheValue, new TimeSpan());
         }
 
@@ -54,7 +52,7 @@ namespace Luna.Caching
         {
             if (cacheKey == null) throw new ArgumentNullException(nameof(cacheKey));
             if (cacheValue == null) throw new ArgumentNullException(nameof(cacheValue));
-            
+
             await Task.Run(() => SetAsync(cacheKey, cacheValue, new TimeSpan()));
         }
 
@@ -71,7 +69,7 @@ namespace Luna.Caching
         {
             if (cacheKey == null) throw new ArgumentNullException(nameof(cacheKey));
             if (func == null) throw new ArgumentNullException(nameof(func));
-            
+
             return Get(cacheKey, func, new TimeSpan());
         }
 
@@ -92,7 +90,7 @@ namespace Luna.Caching
         {
             if (cacheKey == null) throw new ArgumentNullException(nameof(cacheKey));
             if (func == null) throw new ArgumentNullException(nameof(func));
-            
+
             return await GetAsync(cacheKey, func, new TimeSpan());
         }
 
@@ -191,7 +189,7 @@ namespace Luna.Caching
         public void SetAll<T>([NotNull] IDictionary<string, T> value) where T : class
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
-            
+
             SetAll(value, new TimeSpan());
         }
 
@@ -208,7 +206,7 @@ namespace Luna.Caching
         public async Task SetAllAsync<T>([NotNull] IDictionary<string, T> value) where T : class
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
-            
+
             await Task.Run(() => SetAllAsync(value, new TimeSpan()));
         }
 
@@ -290,7 +288,7 @@ namespace Luna.Caching
         public int GetCount(string prefix = "")
         {
             if (string.IsNullOrEmpty(prefix)) return _memoryCache.Count;
-            
+
             lock (_lockObj)
             {
                 var list = _cackeKeys.Where(m => m.StartsWith(prefix)).ToList();
@@ -312,7 +310,7 @@ namespace Luna.Caching
         private TimeSpan GetExpirationWithRandom(TimeSpan expiration)
         {
             if (expiration.TotalSeconds < MaxRandomSecond) return expiration;
-            
+
             var rndSeconds = TimeSpan.FromSeconds(_random.Next(MaxRandomSecond));
             return expiration.Add(rndSeconds);
         }

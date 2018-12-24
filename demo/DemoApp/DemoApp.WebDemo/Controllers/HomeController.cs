@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using DemoApp.Service;
-using Microsoft.AspNetCore.Mvc;
 using DemoApp.WebDemo.Models;
 using Luna.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DemoApp.WebDemo.Controllers
 {
@@ -48,7 +44,7 @@ namespace DemoApp.WebDemo.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }

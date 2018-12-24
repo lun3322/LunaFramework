@@ -1,4 +1,5 @@
-﻿using Castle.Facilities.Logging;
+﻿using System;
+using Castle.Facilities.Logging;
 using Castle.Services.Logging.NLogIntegration;
 using Luna.Web;
 using Microsoft.AspNetCore.Builder;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace DemoApp.WebDemo
 {

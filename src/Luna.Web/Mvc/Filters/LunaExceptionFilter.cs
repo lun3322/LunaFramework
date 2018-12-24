@@ -1,13 +1,13 @@
-﻿using Castle.Core.Logging;
+﻿using System;
+using System.Net;
+using System.Reflection;
+using System.Threading.Tasks;
+using Castle.Core.Logging;
 using Luna.Application.Dto;
 using Luna.Dependency;
 using Luna.Web.Mvc.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Net;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Luna.Web.Mvc.Filters
 {
@@ -35,7 +35,7 @@ namespace Luna.Web.Mvc.Filters
             }
 
             context.Exception = null;
-            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+            context.HttpContext.Response.StatusCode = (int) HttpStatusCode.OK;
             context.Result = new ObjectResult(new ResponseVm("服务器内部错误", 503));
         }
 
@@ -52,7 +52,8 @@ namespace Luna.Web.Mvc.Filters
 
             if (typeof(IActionResult).GetTypeInfo().IsAssignableFrom(returnType))
             {
-                if (typeof(JsonResult).GetTypeInfo().IsAssignableFrom(returnType) || typeof(ObjectResult).GetTypeInfo().IsAssignableFrom(returnType))
+                if (typeof(JsonResult).GetTypeInfo().IsAssignableFrom(returnType) ||
+                    typeof(ObjectResult).GetTypeInfo().IsAssignableFrom(returnType))
                 {
                     return true;
                 }

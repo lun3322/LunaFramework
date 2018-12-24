@@ -1,5 +1,3 @@
-using System;
-
 namespace DemoApp.WebDemo.Models
 {
     public class ErrorViewModel
