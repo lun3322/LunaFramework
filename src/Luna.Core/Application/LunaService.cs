@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Castle.Core.Logging;
-using Castle.Windsor;
+﻿using Castle.Core.Logging;
 using Luna.Caching;
 using Luna.Dependency;
 

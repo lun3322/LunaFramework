@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Castle.Core.Logging;
+﻿using Castle.Core.Logging;
 using DemoApp.Service;
-using Luna;
 using Luna.Dependency;
 
 namespace DemoApp.Core

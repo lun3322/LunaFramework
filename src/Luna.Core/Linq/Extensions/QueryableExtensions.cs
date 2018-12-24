@@ -40,7 +40,8 @@ namespace Luna.Linq.Extensions
         /// <param name="condition"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition, Expression<Func<T, bool>> predicate)
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> query, bool condition,
+            Expression<Func<T, bool>> predicate)
         {
             return condition
                 ? query.Where(predicate)

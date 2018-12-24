@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Luna.Web.Mvc.Filters;
+﻿using Luna.Web.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Luna.Web.Mvc.Extensions
 {

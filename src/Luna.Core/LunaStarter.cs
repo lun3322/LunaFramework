@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using Castle.Core.Logging;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
 using Luna.Dependency;
 
 namespace Luna
@@ -18,7 +15,7 @@ namespace Luna
 
             IocManager.RegisterAssemblyByConvention(GetType().Assembly);
             IocManager.RegisterAssemblyByConvention(entryType.Assembly);
-            
+
             _logger = NullLogger.Instance;
         }
 
@@ -39,6 +36,7 @@ namespace Luna
             {
                 configuration.Initialize();
             }
+
             foreach (var configuration in configurations)
             {
                 configuration.Setup();

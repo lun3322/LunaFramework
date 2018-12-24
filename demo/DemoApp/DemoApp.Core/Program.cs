@@ -1,5 +1,4 @@
-﻿using System;
-using Castle.Facilities.Logging;
+﻿using Castle.Facilities.Logging;
 using Castle.Services.Logging.NLogIntegration;
 using Luna;
 

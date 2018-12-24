@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Castle.Windsor.MsDependencyInjection;
 using Luna.Dependency;
 using Microsoft.Extensions.Configuration;
