@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Core.Tests", "tests\Lu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.EntityFramework", "src\Luna.EntityFramework\Luna.EntityFramework.csproj", "{0F906496-68E7-46E9-8A20-30A6F9F9FDE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.EntityFramework.Tests", "tests\Luna.EntityFramework.Tests\Luna.EntityFramework.Tests.csproj", "{58F95C27-F4B3-43BA-B281-37C0529CC8AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{0F906496-68E7-46E9-8A20-30A6F9F9FDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F906496-68E7-46E9-8A20-30A6F9F9FDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F906496-68E7-46E9-8A20-30A6F9F9FDE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58F95C27-F4B3-43BA-B281-37C0529CC8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58F95C27-F4B3-43BA-B281-37C0529CC8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58F95C27-F4B3-43BA-B281-37C0529CC8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58F95C27-F4B3-43BA-B281-37C0529CC8AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{A8B11B70-50C7-48B6-B937-4387C448EAB2} = {253F5621-72C7-4ACA-B6C4-31608BFC6B56}
 		{C3DC4E2D-6EA5-4EE8-89DC-ADFCC2302218} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 		{0F906496-68E7-46E9-8A20-30A6F9F9FDE6} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
+		{58F95C27-F4B3-43BA-B281-37C0529CC8AA} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B76D42F-3CEF-4DB9-9960-27AE2EC91B8F}

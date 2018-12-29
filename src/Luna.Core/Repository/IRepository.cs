@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Luna.Dependency;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Luna.Repository
 {
@@ -10,13 +10,14 @@ namespace Luna.Repository
     }
 
     public interface IRepository<TEntity> : IRepository<TEntity, int>
-        where TEntity : IEntity<int>
+        where TEntity : class, IEntity<int>
     {
     }
 
     public interface IRepository<TEntity, TPrimaryKey> : IRepository
-        where TEntity : IEntity<TPrimaryKey>
+        where TEntity : class, IEntity<TPrimaryKey>
     {
+        IQueryable<TEntity> GetAll();
         List<TEntity> GetAllList();
         Task<List<TEntity>> GetAllListAsync();
         TEntity Get(TPrimaryKey id);
@@ -27,8 +28,6 @@ namespace Luna.Repository
 
         void Update(TEntity entity);
         Task UpdateAsync(TEntity entity);
-        void Update(TPrimaryKey id, Action<TEntity> updateAction);
-        Task UpdateAsync(TPrimaryKey id, Func<TEntity, Task> updateAction);
 
         void Delete(TEntity entity);
         Task DeleteAsync(TEntity entity);
