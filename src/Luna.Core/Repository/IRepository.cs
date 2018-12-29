@@ -17,7 +17,6 @@ namespace Luna.Repository
     public interface IRepository<TEntity, TPrimaryKey> : IRepository
         where TEntity : class, IEntity<TPrimaryKey>
     {
-        IQueryable<TEntity> GetAll();
         List<TEntity> GetAllList();
         Task<List<TEntity>> GetAllListAsync();
         TEntity Get(TPrimaryKey id);

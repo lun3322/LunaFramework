@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Castle.Core;
 
 namespace Luna.EntityFramework.Repository
 {
