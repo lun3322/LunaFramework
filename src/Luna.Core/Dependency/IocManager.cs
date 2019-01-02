@@ -1,6 +1,9 @@
-﻿using System.Reflection;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Luna.Dependency
 {
@@ -19,14 +22,21 @@ namespace Luna.Dependency
                 Component.For<IocManager, IIocManager>()
                     .UsingFactoryMethod(() => this)
             );
+
+            AllAssembly = new HashSet<Assembly>();
+            AllTypes = new HashSet<Type>();
         }
 
         public static IocManager Instance { get; }
 
         public IWindsorContainer IocContainer { get; }
+        public HashSet<Assembly> AllAssembly { get; internal set; }
+        public HashSet<Type> AllTypes { get; internal set; }
 
         public void RegisterAssemblyByConvention(Assembly assembly)
         {
+            FindAllTypes(assembly);
+
             IocContainer.Register(
                 Classes.FromAssemblyInThisApplication(assembly)
                     .IncludeNonPublicTypes()
@@ -68,6 +78,27 @@ namespace Luna.Dependency
         public void Dispose()
         {
             IocContainer?.Dispose();
+        }
+
+        private void FindAllTypes(Assembly assembly)
+        {
+            var appName = assembly.FullName.Split('.')[0];
+
+            var assemblyList = new List<Assembly> {assembly};
+            var referencedAssemblies = assembly.GetReferencedAssemblies()
+                .Where(m => m.FullName.StartsWith(appName))
+                .ToList();
+            foreach (var name in referencedAssemblies)
+            {
+                assemblyList.Add(Assembly.Load(name));
+            }
+
+            assemblyList.ForEach(m =>
+            {
+                AllAssembly.Add(m);
+                var types = m.GetTypes().Where(x => !x.IsGenericType).ToList();
+                types.ForEach(x => AllTypes.Add(x));
+            });
         }
     }
 }

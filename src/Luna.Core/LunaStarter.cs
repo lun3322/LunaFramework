@@ -1,6 +1,9 @@
-﻿using System;
-using Castle.Core.Logging;
+﻿using Castle.Core.Logging;
 using Luna.Dependency;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Luna
 {
@@ -13,7 +16,7 @@ namespace Luna
         {
             IocManager = option.IocManager;
 
-            IocManager.RegisterAssemblyByConvention(GetType().Assembly);
+            IocManager.RegisterAssemblyByConvention(typeof(LunaStarter).Assembly);
             IocManager.RegisterAssemblyByConvention(entryType.Assembly);
 
             _logger = NullLogger.Instance;

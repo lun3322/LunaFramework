@@ -1,6 +1,4 @@
-﻿using Castle.Core;
-using Dapper.FastCrud;
-using Luna.Dapper.Uow;
+﻿using Dapper.FastCrud;
 using Luna.Repository;
 using System.Collections.Generic;
 using System.Data;
@@ -12,23 +10,20 @@ namespace Luna.Dapper.Repository
     public class DapperRepositoryBase<TEntity> : DapperRepositoryBase<TEntity, int>, IRepository<TEntity>
         where TEntity : class, IEntity<int>, new()
     {
-        public DapperRepositoryBase(IDbConnectionProvider dbConnectionProvider)
-            : base(dbConnectionProvider)
+        public DapperRepositoryBase(ILunaDbContext dbContext)
+            : base(dbContext)
         {
         }
     }
 
-    [Interceptor(typeof(DapperUnitOfWorkInterceptor))]
     public class DapperRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>, new()
     {
-        public IDbConnection DbConnection => _dbConnectionProvider.GetDbConnection();
+        public IDbConnection DbConnection { get; set; }
 
-        private readonly IDbConnectionProvider _dbConnectionProvider;
-
-        public DapperRepositoryBase(IDbConnectionProvider dbConnectionProvider)
+        public DapperRepositoryBase(ILunaDbContext dbContext)
         {
-            _dbConnectionProvider = dbConnectionProvider;
+            DbConnection = dbContext.DbConnection;
         }
 
         public List<TEntity> GetAllList()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Castle.Windsor;
 
@@ -37,5 +38,8 @@ namespace Luna.Dependency
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         bool IsRegistered<T>();
+
+        HashSet<Assembly> AllAssembly { get; }
+        HashSet<Type> AllTypes { get; }
     }
 }
