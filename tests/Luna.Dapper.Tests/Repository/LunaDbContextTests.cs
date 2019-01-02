@@ -2,9 +2,7 @@
 using Luna.Dapper.Repository;
 using Luna.Repository;
 using Shouldly;
-using System;
 using System.Linq;
-using System.Reflection;
 using Xunit;
 
 namespace Luna.Dapper.Tests.Repository
@@ -49,13 +47,14 @@ namespace Luna.Dapper.Tests.Repository
 
             properties.ForEach(m =>
             {
-                var genericType = typeof(DapperRepositoryBase<>)
+                var implType = typeof(DapperRepositoryBase<,>)
+                    .MakeGenericType(m.DeclaringType, m.PropertyType);
+                var interfaceType = typeof(IRepository<>)
                     .MakeGenericType(m.PropertyType);
-                var instance = Activator.CreateInstance(genericType, m.DeclaringType);
 
                 IocManager.IocContainer.Register(
-                    Component.For(typeof(IRepository<>))
-                        .Instance(instance)
+                    Component.For(interfaceType)
+                        .ImplementedBy(implType)
                         .LifestyleTransient()
                     );
             });

@@ -7,24 +7,20 @@ using System.Threading.Tasks;
 
 namespace Luna.Dapper.Repository
 {
-    public class DapperRepositoryBase<TEntity> : DapperRepositoryBase<TEntity, int>, IRepository<TEntity>
+    public class DapperRepositoryBase<TLunaDbContext, TEntity> : DapperRepositoryBase<TLunaDbContext, TEntity, int>, IRepository<TEntity>
         where TEntity : class, IEntity<int>, new()
+        where TLunaDbContext : ILunaDbContext
     {
-        public DapperRepositoryBase(ILunaDbContext dbContext)
-            : base(dbContext)
-        {
-        }
+
     }
 
-    public class DapperRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
+    public class DapperRepositoryBase<TLunaDbContext, TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>, new()
+        where TLunaDbContext : ILunaDbContext
     {
-        public IDbConnection DbConnection { get; set; }
+        public IDbConnection DbConnection => DbContext.DbConnection;
 
-        public DapperRepositoryBase(ILunaDbContext dbContext)
-        {
-            DbConnection = dbContext.DbConnection;
-        }
+        public TLunaDbContext DbContext { get; set; }
 
         public List<TEntity> GetAllList()
         {
