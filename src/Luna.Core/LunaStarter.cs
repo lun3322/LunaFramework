@@ -31,6 +31,7 @@ namespace Luna
         public void Initialize()
         {
             ResolveLogger();
+            LunaConfigurationRegister.Initialize(IocManager);
 
             var configurations = IocManager.IocContainer.ResolveAll<ILunaConfiguration>();
             _logger.Info($"找到 {configurations.Length} 个 LunaConfiguration");

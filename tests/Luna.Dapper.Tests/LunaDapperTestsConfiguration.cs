@@ -2,7 +2,6 @@
 using Dapper.FastCrud;
 using Luna.Dependency;
 using System.Data;
-using System.Data.SQLite;
 
 namespace Luna.Dapper.Tests
 {
@@ -22,7 +21,7 @@ namespace Luna.Dapper.Tests
 
         public override void Setup()
         {
-            OrmConfiguration.DefaultDialect = SqlDialect.SqLite;
+            OrmConfiguration.DefaultDialect = SqlDialect.MySql;
         }
     }
 }

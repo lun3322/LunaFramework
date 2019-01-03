@@ -2,32 +2,20 @@
 using Luna.Repository;
 using Shouldly;
 using System;
+using Luna.Dapper.Tests.Entities;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Luna.Dapper.Tests.Repository
 {
     public class DapperRepositoryTests : TestBase
     {
+        private readonly ITestOutputHelper _output;
         private readonly IRepository<TestEntity> _repository;
-        private readonly IDbConnectionProvider _dbConnectionProvider;
-        public DapperRepositoryTests()
+        public DapperRepositoryTests(ITestOutputHelper output)
         {
+            _output = output;
             _repository = IocManager.Resolve<IRepository<TestEntity>>();
-            _dbConnectionProvider = IocManager.Resolve<IDbConnectionProvider>();
-
-            CreateTable();
-        }
-
-        private void CreateTable()
-        {
-            const string strsql = @"
-CREATE TABLE 'TestEntity' (
-  'Id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  'Name' text NOT NULL,
-  'Age' INTEGER NOT NULL
-);;
-";
-            _dbConnectionProvider.GetDbConnection().Execute(strsql);
         }
 
         [Fact]
@@ -41,10 +29,16 @@ CREATE TABLE 'TestEntity' (
             var firstInsert = _repository.Insert(entity);
             var secondInsert = _repository.Insert(entity);
 
-            firstInsert.ShouldBe(1);
-            secondInsert.ShouldBe(2);
+            _output.WriteLine(firstInsert.ToString());
+            _output.WriteLine(secondInsert.ToString());
+
+            firstInsert.ShouldBeGreaterThan(0);
+            secondInsert.ShouldBeGreaterThan(0);
 
             _repository.Count().ShouldBe(2);
+            _repository.Delete(firstInsert);
+            _repository.Delete(secondInsert);
+            _repository.Count().ShouldBe(0);
         }
     }
 }

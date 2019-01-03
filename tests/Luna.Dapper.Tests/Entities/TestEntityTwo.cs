@@ -1,11 +1,11 @@
-﻿using Luna.Repository;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Luna.Repository;
 
-namespace Luna.Dapper.Tests
+namespace Luna.Dapper.Tests.Entities
 {
-    [Table("TestEntity")]
-    public class TestEntity : IEntity<int>
+    [Table("TestEntityTwo")]
+    public class TestEntityTwo : IEntity<int>
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

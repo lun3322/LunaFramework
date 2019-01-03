@@ -1,6 +1,8 @@
 ﻿using Luna.Repository;
 using Shouldly;
 using System.Linq;
+using Luna.Dapper.Tests.Entities;
+using Luna.Extensions;
 using Xunit;
 
 namespace Luna.Dapper.Tests
@@ -10,10 +12,11 @@ namespace Luna.Dapper.Tests
         [Fact]
         public void Multi_Entity_Test()
         {
-            var entityBaseType = typeof(IEntity);
+            var entityBaseType = typeof(IEntity<>);
             var entityTypes = IocManager.AllTypes
                 .Where(m => m != entityBaseType)
-                .Where(m => entityBaseType.IsAssignableFrom(m)).ToList();
+                .Where(m => m.IsImplementedGeneric(entityBaseType))
+                .ToList();
 
             entityTypes.Count.ShouldBe(2);
             entityTypes.Contains(typeof(TestEntity)).ShouldBeTrue();

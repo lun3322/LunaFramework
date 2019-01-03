@@ -6,6 +6,8 @@ namespace Luna.Dependency
     {
         public ILogger Logger { get; set; }
 
+        public IIocManager IocManager { get; set; }
+
         protected LunaConfiguration()
         {
             Logger = NullLogger.Instance;

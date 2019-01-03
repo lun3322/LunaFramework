@@ -27,11 +27,30 @@ namespace Luna.Dependency
             AllTypes = new HashSet<Type>();
         }
 
+        public HashSet<Assembly> AllAssembly { get; internal set; }
+        public HashSet<Type> AllTypes { get; internal set; }
         public static IocManager Instance { get; }
 
         public IWindsorContainer IocContainer { get; }
-        public HashSet<Assembly> AllAssembly { get; internal set; }
-        public HashSet<Type> AllTypes { get; internal set; }
+
+        public void RegisterTypeSingleton(Type serviceType, Type implementedType)
+        {
+            IocContainer.Register(
+                Component.For(serviceType)
+                    .ImplementedBy(implementedType)
+                    .Named($"{nameof(implementedType)}-{Guid.NewGuid()}")
+                    .LifestyleSingleton()
+            );
+        }
+
+        public void RegisterTypeTransient(Type serviceType, Type implementedType)
+        {
+            IocContainer.Register(
+                Component.For(serviceType)
+                    .ImplementedBy(implementedType)
+                    .LifestyleTransient()
+            );
+        }
 
         public void RegisterAssemblyByConvention(Assembly assembly)
         {
@@ -42,7 +61,6 @@ namespace Luna.Dependency
                     .IncludeNonPublicTypes()
                     .BasedOn<ITransientDependency>()
                     .If(type => !type.GetTypeInfo().IsGenericTypeDefinition)
-                    .WithServiceAllInterfaces()
                     .WithService.Self()
                     .WithService.DefaultInterfaces()
                     .LifestyleTransient()
@@ -53,7 +71,6 @@ namespace Luna.Dependency
                     .IncludeNonPublicTypes()
                     .BasedOn<ISingletonDependency>()
                     .If(type => !type.GetTypeInfo().IsGenericTypeDefinition)
-                    .WithServiceAllInterfaces()
                     .WithService.Self()
                     .WithService.DefaultInterfaces()
                     .LifestyleSingleton()
@@ -84,7 +101,7 @@ namespace Luna.Dependency
         {
             var appName = assembly.FullName.Split('.')[0];
 
-            var assemblyList = new List<Assembly> {assembly};
+            var assemblyList = new List<Assembly> { assembly };
             var referencedAssemblies = assembly.GetReferencedAssemblies()
                 .Where(m => m.FullName.StartsWith(appName))
                 .ToList();
