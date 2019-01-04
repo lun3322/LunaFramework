@@ -1,6 +1,6 @@
 ﻿namespace Luna.Dependency
 {
-    public interface ILunaConfiguration : ISingletonDependency
+    public interface ILunaConfiguration
     {
         void Initialize();
 

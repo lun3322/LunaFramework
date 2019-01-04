@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Castle.Windsor;
+using System;
 using System.Reflection;
+using System.Text;
 using Castle.Windsor;
 
 namespace Luna.Dependency
@@ -37,5 +39,11 @@ namespace Luna.Dependency
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         bool IsRegistered<T>();
+
+        void RegisterTypeTransient(Type serviceType, Type implementedType);
+        void RegisterTypeSingleton(Type serviceType, Type implementedType);
+
+        HashSet<Assembly> AllAssembly { get; }
+        HashSet<Type> AllTypes { get; }
     }
 }

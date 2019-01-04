@@ -1,20 +1,30 @@
-﻿using Luna.Dependency;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Luna.Dependency;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Luna.Core.Tests.Dependency
 {
     public class LunaConfigurationTests : TestBase
     {
-        [Fact]
-        public void Multi_LunaConfiguration_Test()
+        private readonly ITestOutputHelper _output;
+
+        public LunaConfigurationTests(ITestOutputHelper output)
         {
-            var resolveAll = IocManager.ResolveAll<ILunaConfiguration>();
+            _output = output;
+        }
 
-            resolveAll.Length.ShouldBeGreaterThan(1);
+        [Fact]
+        public void LunaConfiguration_Is_In_Ioc_Test()
+        {
+            var configurations = IocManager.ResolveAll<ILunaConfiguration>();
+            var length = configurations.Length;
+            _output.WriteLine(length.ToString());
 
-            resolveAll.ShouldContain(m => m.GetType() == typeof(LunaConfigurationTest1));
-            resolveAll.ShouldContain(m => m.GetType() == typeof(LunaConfigurationTest2));
+            length.ShouldBeGreaterThan(0);
         }
     }
 }

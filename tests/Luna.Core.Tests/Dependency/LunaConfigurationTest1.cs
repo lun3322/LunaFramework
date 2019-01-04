@@ -1,4 +1,7 @@
-﻿using Luna.Dependency;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Luna.Dependency;
 
 namespace Luna.Core.Tests.Dependency
 {
