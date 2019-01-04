@@ -1,5 +1,6 @@
 ﻿using Dapper.FastCrud;
 using Luna.Repository;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,24 +8,28 @@ using System.Threading.Tasks;
 
 namespace Luna.Dapper.Repository
 {
-    public class DapperRepositoryBase<TLunaDbContext, TEntity> : DapperRepositoryBase<TLunaDbContext, TEntity, int>, IRepository<TEntity>
-        where TEntity : class, IEntity<int>, new()
-        where TLunaDbContext : ILunaDbContext
-    {
-
-    }
-
-    public class DapperRepositoryBase<TLunaDbContext, TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
+    public abstract class DapperRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>, new()
-        where TLunaDbContext : ILunaDbContext
     {
-        public IDbConnection DbConnection => DbContext.DbConnection;
+        private readonly IDbConnection _connection;
+        protected DapperRepositoryBase(IDbConnection dbConnection)
+        {
+            _connection = dbConnection;
+        }
 
-        public TLunaDbContext DbContext { get; set; }
+        public IDbConnection GetConnection()
+        {
+            var connection = _connection;
+            connection.Open();
+            return connection;
+        }
 
         public List<TEntity> GetAllList()
         {
-            return DbConnection.Find<TEntity>().ToList();
+            using (var dbConnection = GetConnection())
+            {
+                return dbConnection.Find<TEntity>().ToList();
+            }
         }
 
         public Task<List<TEntity>> GetAllListAsync()
@@ -34,7 +39,10 @@ namespace Luna.Dapper.Repository
 
         public TEntity Get(TPrimaryKey id)
         {
-            return DbConnection.Get(new TEntity { Id = id });
+            using (var dbConnection = GetConnection())
+            {
+                return dbConnection.Get(new TEntity { Id = id });
+            }
         }
 
         public Task<TEntity> GetAsync(TPrimaryKey id)
@@ -44,8 +52,11 @@ namespace Luna.Dapper.Repository
 
         public TPrimaryKey Insert(TEntity entity)
         {
-            DbConnection.Insert(entity);
-            return entity.Id;
+            using (var dbConnection = GetConnection())
+            {
+                dbConnection.Insert(entity);
+                return entity.Id;
+            }
         }
 
         public Task<TPrimaryKey> InsertAsync(TEntity entity)
@@ -55,7 +66,10 @@ namespace Luna.Dapper.Repository
 
         public void Update(TEntity entity)
         {
-            DbConnection.Update(entity);
+            using (var dbConnection = GetConnection())
+            {
+                dbConnection.Update(entity);
+            }
         }
 
         public Task UpdateAsync(TEntity entity)
@@ -66,7 +80,10 @@ namespace Luna.Dapper.Repository
 
         public void Delete(TEntity entity)
         {
-            DbConnection.Delete(entity);
+            using (var dbConnection = GetConnection())
+            {
+                dbConnection.Delete(entity);
+            }
         }
 
         public Task DeleteAsync(TEntity entity)
@@ -77,7 +94,10 @@ namespace Luna.Dapper.Repository
 
         public void Delete(TPrimaryKey id)
         {
-            DbConnection.Delete(new TEntity { Id = id });
+            using (var dbConnection = GetConnection())
+            {
+                dbConnection.Delete(new TEntity { Id = id });
+            }
         }
 
         public Task DeleteAsync(TPrimaryKey id)
@@ -88,7 +108,10 @@ namespace Luna.Dapper.Repository
 
         public int Count()
         {
-            return DbConnection.Count<TEntity>();
+            using (var dbConnection = GetConnection())
+            {
+                return dbConnection.Count<TEntity>();
+            }
         }
 
         public Task<int> CountAsync()

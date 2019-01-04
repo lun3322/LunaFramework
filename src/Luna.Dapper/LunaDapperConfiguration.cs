@@ -7,7 +7,6 @@ namespace Luna.Dapper
     {
         public override void Initialize()
         {
-            RepositoryRegister.Initialize(IocManager);
         }
 
         public override void Setup()

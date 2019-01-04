@@ -1,22 +1,14 @@
 using Luna.Dependency;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace Luna.Repository
 {
-    public interface IRepository : ITransientDependency
+    public interface IRepository<TEntity, TPrimaryKey> : ITransientDependency
+        where TEntity : class, IEntity<TPrimaryKey>, new()
     {
-    }
-
-    public interface IRepository<TEntity> : IRepository<TEntity, int>
-        where TEntity : class, IEntity<int>
-    {
-    }
-
-    public interface IRepository<TEntity, TPrimaryKey> : IRepository
-        where TEntity : class, IEntity<TPrimaryKey>
-    {
+        IDbConnection GetConnection();
         List<TEntity> GetAllList();
         Task<List<TEntity>> GetAllListAsync();
         TEntity Get(TPrimaryKey id);

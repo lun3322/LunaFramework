@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Luna.Repository;
 using System.ComponentModel.DataAnnotations.Schema;
+using Luna.Repository;
 
-namespace Luna.Dapper.Tests.Entities
+namespace Luna.Dapper.Tests.Domain
 {
     [Table("TestEntityThree")]
     public class TestEntityThree : IEntity<long>

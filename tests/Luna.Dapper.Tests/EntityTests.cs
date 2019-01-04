@@ -1,7 +1,7 @@
 ﻿using Luna.Repository;
 using Shouldly;
 using System.Linq;
-using Luna.Dapper.Tests.Entities;
+using Luna.Dapper.Tests.Domain;
 using Luna.Extensions;
 using Xunit;
 

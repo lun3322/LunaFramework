@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Luna.Repository;
 
-namespace Luna.Dapper.Tests.Entities
+namespace Luna.Dapper.Tests.Domain
 {
     [Table("TestEntity")]
     public class TestEntity : IEntity<int>
