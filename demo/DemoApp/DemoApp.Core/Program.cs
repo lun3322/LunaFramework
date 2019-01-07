@@ -15,7 +15,7 @@ namespace DemoApp.Core
 
                 starter.Initialize();
 
-                var runner = starter.IocManager.Resolve<IRunner>();
+                var runner = starter.IocManager.Resolve<Runner>();
                 runner.Run();
             }
         }

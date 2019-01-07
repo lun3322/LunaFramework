@@ -4,7 +4,7 @@ using Luna.Dependency;
 
 namespace DemoApp.Core
 {
-    public class Runner : IRunner, ITransientDependency
+    public class Runner : ITransientDependency
     {
         public ILogger Logger { get; set; }
 
