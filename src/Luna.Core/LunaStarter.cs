@@ -1,11 +1,6 @@
 ﻿using Castle.Core.Logging;
 using Luna.Dependency;
 using System;
-using System.Reflection;
-using Castle.Core.Logging;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using Luna.Dependency;
 
 namespace Luna
 {
@@ -24,10 +19,13 @@ namespace Luna
             _logger = NullLogger.Instance;
         }
 
-        public static LunaStarter Create<T>(LunaStarterOption option = null)
+        public static LunaStarter Create<T>(Action<LunaStarterOption> action = null)
             where T : class
         {
-            return new LunaStarter(typeof(T), option ?? new LunaStarterOption());
+            var option = new LunaStarterOption();
+            action?.Invoke(option);
+
+            return new LunaStarter(typeof(T), option);
         }
 
         public void Initialize()

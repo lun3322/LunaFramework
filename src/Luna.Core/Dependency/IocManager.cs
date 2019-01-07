@@ -9,6 +9,12 @@ namespace Luna.Dependency
 {
     public class IocManager : IIocManager
     {
+        public static IocManager Instance { get; }
+
+        public HashSet<Assembly> AllAssembly { get; internal set; }
+        public HashSet<Type> AllTypes { get; internal set; }
+        public IWindsorContainer IocContainer { get; }
+
         static IocManager()
         {
             Instance = new IocManager();
@@ -20,18 +26,12 @@ namespace Luna.Dependency
             // 把自己注册进容器
             IocContainer.Register(
                 Component.For<IocManager, IIocManager>()
-                    .UsingFactoryMethod(() => this)
+                    .Instance(this)
             );
 
             AllAssembly = new HashSet<Assembly>();
             AllTypes = new HashSet<Type>();
         }
-
-        public HashSet<Assembly> AllAssembly { get; internal set; }
-        public HashSet<Type> AllTypes { get; internal set; }
-        public static IocManager Instance { get; }
-
-        public IWindsorContainer IocContainer { get; }
 
         public void RegisterTypeSingleton(Type serviceType, Type implementedType)
         {
@@ -112,9 +112,12 @@ namespace Luna.Dependency
 
             assemblyList.ForEach(m =>
             {
-                AllAssembly.Add(m);
-                var types = m.GetTypes().Where(x => !x.IsGenericType).ToList();
-                types.ForEach(x => AllTypes.Add(x));
+                lock (Instance)
+                {
+                    AllAssembly.Add(m);
+                    var types = m.GetTypes().Where(x => !x.IsGenericType).ToList();
+                    types.ForEach(x => AllTypes.Add(x));
+                }
             });
         }
     }

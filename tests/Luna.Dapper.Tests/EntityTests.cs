@@ -18,7 +18,7 @@ namespace Luna.Dapper.Tests
                 .Where(m => m.IsImplementedGeneric(entityBaseType))
                 .ToList();
 
-            entityTypes.Count.ShouldBe(2);
+            entityTypes.Count.ShouldBe(3);
             entityTypes.Contains(typeof(TestEntity)).ShouldBeTrue();
             entityTypes.Contains(typeof(TestEntityTwo)).ShouldBeTrue();
         }

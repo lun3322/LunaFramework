@@ -21,6 +21,11 @@ namespace Luna.Dapper.Tests.Repository
         public void TestEntityRepository_Is_Registered_Test()
         {
             IocManager.IsRegistered<ITestEntityRepository>().ShouldBeTrue();
+        }
+
+        [Fact]
+        public void TestEntityTwoRepository_Is_Registered_Test()
+        {
             IocManager.IsRegistered<ITestEntityTwoRepository>().ShouldBeTrue();
         }
 

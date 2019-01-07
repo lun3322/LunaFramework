@@ -4,7 +4,7 @@ namespace Luna
 {
     public class LunaStarterOption
     {
-        public IocManager IocManager { get; }
+        public IocManager IocManager { get; set; }
 
         public LunaStarterOption()
         {
