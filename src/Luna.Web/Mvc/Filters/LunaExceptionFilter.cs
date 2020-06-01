@@ -8,6 +8,7 @@ using Luna.Dependency;
 using Luna.Web.Mvc.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using ExceptionContext = Microsoft.AspNetCore.Mvc.Filters.ExceptionContext;
 
 namespace Luna.Web.Mvc.Filters
 {
