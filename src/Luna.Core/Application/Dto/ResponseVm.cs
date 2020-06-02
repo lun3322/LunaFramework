@@ -33,6 +33,11 @@
         {
             return new ResponseVm(msg, code);
         }
+
+        public static ResponseVm Create(bool result, string successMsg = "ok", string failedMsg = "error")
+        {
+            return result ? Success(successMsg) : Failed(failedMsg);
+        }
     }
 
     public class ResponseVm<T> : ResponseVm
@@ -45,11 +50,11 @@
         {
         }
 
-        public T Info { get; set; }
+        public T Data { get; set; }
 
         public static ResponseVm<T> Success(T vm)
         {
-            return new ResponseVm<T> {Info = vm};
+            return new ResponseVm<T> {Data = vm};
         }
     }
 }

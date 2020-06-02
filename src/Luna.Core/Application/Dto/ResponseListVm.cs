@@ -20,6 +20,14 @@ namespace Luna.Application.Dto
         /// <summary>
         ///     内容
         /// </summary>
-        public List<T> Infos { get; set; }
+        public List<T> Data { get; set; }
+
+        public static ResponseListVm<T> Create(List<T> data)
+        {
+            return new ResponseListVm<T>
+            {
+                Data = data
+            };
+        }
     }
 }

@@ -36,8 +36,8 @@ namespace Luna.Web.Mvc.Filters
             }
 
             context.Exception = null;
-            context.HttpContext.Response.StatusCode = (int) HttpStatusCode.OK;
-            context.Result = new ObjectResult(new ResponseVm("服务器内部错误", 503));
+            context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+            context.Result = new ObjectResult(new ResponseVm("服务器内部错误", 500));
         }
 
         public static bool IsObjectResult(Type returnType)
