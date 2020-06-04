@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <Version>0.5.1</Version>
+    <Version>0.5.3</Version>
     <Authors>chenhongbo</Authors>
     <PackageProjectUrl>https://github.com/lun3322/LunaFramework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lun3322/LunaFramework</RepositoryUrl> 

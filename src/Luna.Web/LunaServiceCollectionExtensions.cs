@@ -15,11 +15,14 @@ namespace Luna.Web
         {
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 
-            services.Configure<MvcOptions>(mvcOpt => { mvcOpt.Configure(); });
-
             var opt = new LunaStarterOption();
             action?.Invoke(opt);
-            var start = LunaStarter.Create<TModule>();
+            if (opt.UseDefaultLunaFilter)
+            {
+                services.Configure<MvcOptions>(mvcOpt => { mvcOpt.Configure(); });
+            }
+
+            var start = LunaStarter.Create<TModule>(action);
             services.AddSingleton(start);
 
             return WindsorRegistrationHelper.CreateServiceProvider(start.IocManager.IocContainer, services);

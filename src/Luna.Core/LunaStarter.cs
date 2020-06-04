@@ -19,11 +19,14 @@ namespace Luna
             _logger = NullLogger.Instance;
         }
 
-        public static LunaStarter Create<T>(Action<LunaStarterOption> action = null)
+        public static LunaStarter Create<T>(Action<LunaStarterOption> action = null, bool isRun = false)
             where T : class
         {
             var option = new LunaStarterOption();
-            action?.Invoke(option);
+            if (isRun)
+            {
+                action?.Invoke(option);
+            }
 
             return new LunaStarter(typeof(T), option);
         }
