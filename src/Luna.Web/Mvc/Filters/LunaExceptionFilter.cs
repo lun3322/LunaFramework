@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Castle.Core.Logging;
 using Luna.Application.Dto;
 using Luna.Dependency;
+using Luna.Exceptions;
 using Luna.Web.Mvc.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -28,12 +29,20 @@ namespace Luna.Web.Mvc.Filters
                 return;
             }
 
-            _logger.Error(context.Exception.ToString());
             // 判断返回值类型
             if (!IsObjectResult(context.ActionDescriptor.GetMethodInfo().ReturnType))
             {
                 return;
             }
+
+            if (context.Exception is LunaUserFriendlyException ex)
+            {
+                context.HttpContext.Response.StatusCode = (int) HttpStatusCode.OK;
+                context.Result = new ObjectResult(new ResponseVm(ex.Message, ex.Code));
+                return;
+            }
+
+            _logger.Error(context.Exception.ToString());
 
             context.Exception = null;
             context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
