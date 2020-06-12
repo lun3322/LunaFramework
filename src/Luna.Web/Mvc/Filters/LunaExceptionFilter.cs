@@ -9,11 +9,10 @@ using Luna.Exceptions;
 using Luna.Web.Mvc.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using ExceptionContext = Microsoft.AspNetCore.Mvc.Filters.ExceptionContext;
 
 namespace Luna.Web.Mvc.Filters
 {
-    public class LunaExceptionFilter : ExceptionFilterAttribute, ITransientDependency
+    public class LunaExceptionFilter : ExceptionFilterAttribute, ISingletonDependency
     {
         private readonly ILogger _logger;
 

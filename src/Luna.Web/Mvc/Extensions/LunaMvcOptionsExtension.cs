@@ -7,7 +7,8 @@ namespace Luna.Web.Mvc.Extensions
     {
         public static void Configure(this MvcOptions @this)
         {
-            @this.Filters.Add(typeof(LunaExceptionFilter));
+            @this.Filters.Add<LunaExceptionFilter>();
+            @this.Filters.Add<ModelVerificationFilter>();
         }
     }
 }
