@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -39,6 +40,18 @@ namespace Luna.Extensions
             return BitConverter.ToString(bytes);
         }
 
+        public static string ToMd5Hash(this string @this)
+        {
+            var bytes = Encoding.UTF8.GetBytes(@this);
+            using var stream = new MemoryStream(bytes);
+            return stream.ToMd5Hash();
+        }
+
+        public static bool IsNullOrWhiteSpace(this string @this)
+        {
+            return string.IsNullOrWhiteSpace(@this);
+        }
+
         public static bool IsNotNullOrWhiteSpace(this string value)
         {
             return !string.IsNullOrWhiteSpace(value);
@@ -47,6 +60,11 @@ namespace Luna.Extensions
         public static bool IsNotNullOrEmpty(this string @this)
         {
             return !string.IsNullOrEmpty(@this);
+        }
+
+        public static bool IsNullOrEmpty(this string @this)
+        {
+            return string.IsNullOrEmpty(@this);
         }
 
         public static bool IsNumeric(this string @this)
