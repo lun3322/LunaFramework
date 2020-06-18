@@ -41,7 +41,6 @@ namespace DemoApp.WebDemo
             {
                 opt.IocManager.IocContainer.AddFacility<LoggingFacility>(m =>
                     m.LogUsing<NLogFactory>().WithConfig("nlog.config"));
-                opt.EnableLunaFilters = true;
             });
         }
 
