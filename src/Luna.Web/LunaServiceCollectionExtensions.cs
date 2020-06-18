@@ -17,9 +17,11 @@ namespace Luna.Web
 
             var opt = new LunaStarterOption();
             action?.Invoke(opt);
-            if (opt.UseDefaultLunaFilter)
+            if (opt.EnableLunaFilters)
             {
                 services.Configure<MvcOptions>(mvcOpt => { mvcOpt.Configure(); });
+                // 为了启用全局模型验证
+                services.Configure<ApiBehaviorOptions>(o => { o.SuppressModelStateInvalidFilter = true; });
             }
 
             var start = LunaStarter.Create<TModule>(action);
