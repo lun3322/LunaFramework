@@ -17,6 +17,11 @@ namespace DemoApp.WebDemo.Controllers
             throw new Exception("Test exception");
         }
 
+        public ViewResult ViewTest()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ResponseVm GetVm()
         {

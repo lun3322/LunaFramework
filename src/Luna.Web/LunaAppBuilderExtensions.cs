@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Castle.Core.Logging;
+using Luna.Dependency;
+using Luna.Web.Mvc.Middleware;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Luna.Web
@@ -9,6 +13,8 @@ namespace Luna.Web
         {
             var starter = app.ApplicationServices.GetRequiredService<LunaStarter>();
             starter.Initialize();
+
+            app.UseMiddleware<LunaExceptionLogMiddleware>();
 
             return app;
         }

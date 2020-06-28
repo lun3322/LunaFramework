@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.Windsor.MsDependencyInjection;
 using Luna.Web.Mvc.Extensions;
+using Luna.Web.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Luna.Web
 
             var opt = new LunaStarterOption();
             action?.Invoke(opt);
+
             if (opt.EnableLunaFilters)
             {
                 services.Configure<MvcOptions>(mvcOpt => { mvcOpt.Configure(); });

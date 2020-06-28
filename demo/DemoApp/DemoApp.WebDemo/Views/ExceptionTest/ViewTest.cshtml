@@ -1,0 +1,6 @@
+﻿@{
+    ViewData["Title"] = "ViewTest";
+}
+
+<h2>ViewTest</h2>
+@Html.DropDownList("consultId", ViewData["ConsultType"] as SelectList, "--请选择--", new {@class = "form-control mb15"})

@@ -23,6 +23,7 @@ namespace Luna.Web.Mvc.Filters
 
         public override void OnException(ExceptionContext context)
         {
+            _logger.Error(context.Exception.ToString());
             if (!context.ActionDescriptor.IsControllerAction())
             {
                 return;
@@ -40,8 +41,6 @@ namespace Luna.Web.Mvc.Filters
                 context.Result = new ObjectResult(new ResponseVm(ex.Message, ex.Code));
                 return;
             }
-
-            _logger.Error(context.Exception.ToString());
 
             context.Exception = null;
             context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;

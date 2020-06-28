@@ -2,6 +2,7 @@
 using DemoApp.Service;
 using DemoApp.WebDemo.Models;
 using Luna.Web.Mvc;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoApp.WebDemo.Controllers
@@ -44,7 +45,9 @@ namespace DemoApp.WebDemo.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+            var exceptionHandlerPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            Logger.Error(exceptionHandlerPathFeature.Error.ToString());
+            return Ok();
         }
     }
 }
