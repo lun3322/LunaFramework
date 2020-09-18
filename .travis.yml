@@ -6,4 +6,4 @@ script:
   - dotnet build
 deploy:
   provider: script
-  script: bash scripts/deploy.sh $NUGET_KEY
+  script: bash publish2Nuget.sh $NUGET_KEY
