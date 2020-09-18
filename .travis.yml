@@ -3,4 +3,4 @@ solution: LunaFramework.sln
 mono: none
 dotnet: 3.1.402
 script: 
-  - msbuild /p:Configuration=Release LunaFramework.sln
+  - dotnet build
