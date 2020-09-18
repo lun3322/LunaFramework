@@ -1,6 +1,6 @@
-# LunaFramework
+# LunaFramework [![Build Status](https://travis-ci.com/lun3322/LunaFramework.svg?branch=master)](https://travis-ci.com/lun3322/LunaFramework)
 
-## mygetÔ´
+## mygetæº
 https://www.myget.org/F/luna/api/v3/index.json
 ```
 Install-Package Luna
@@ -8,9 +8,9 @@ Install-Package Luna.Castle.Nlog
 Install-Package Luna.Web
 ```
 
-## ¹ØÓÚÊ¹ÓÃ
-1. Èç¹ûÄãÒ²Ê¹ÓÃnlogĞ´ÈÕÖ¾µÄ»°¿ÉÒÔÖ±½ÓÒıÓÃ Luna.Service.Nlog °ü.¹ØÓÚÈÕÖ¾µÄÒ»¸öÅäÖÃ»á×Ô¶¯¼ÓÔØµ½ÏîÄ¿ÖĞ
-2. ÔÚMain·½·¨ÖĞĞÂÔö´úÂë
+## å…³äºä½¿ç”¨
+1. å¦‚æœä½ ä¹Ÿä½¿ç”¨nlogå†™æ—¥å¿—çš„è¯å¯ä»¥ç›´æ¥å¼•ç”¨ Luna.Service.Nlog åŒ….å…³äºæ—¥å¿—çš„ä¸€ä¸ªé…ç½®ä¼šè‡ªåŠ¨åŠ è½½åˆ°é¡¹ç›®ä¸­
+2. åœ¨Mainæ–¹æ³•ä¸­æ–°å¢ä»£ç 
     ```
 	using (var starter = LunaStarter.Create<Program>())
 	{
@@ -20,7 +20,7 @@ Install-Package Luna.Web
 		starter.Initialize();
 	}
     ```
-1. Ôö¼ÓÄãµÄserviceÏñÏÂÃæÕâÑù
+1. å¢åŠ ä½ çš„serviceåƒä¸‹é¢è¿™æ ·
     ```
     public interface IDemoService : ILunaService
     {
@@ -32,16 +32,16 @@ Install-Package Luna.Web
     	public string GetMessage()
     	{
     		Logger.Info("GetMessage");
-    		return "²âÊÔ";
+    		return "æµ‹è¯•";
     	}
     }
     ```
-    ×¢Òâ½Ó¿ÚÊµÏÖILunaService²ÅÄÜ±»×Ô¶¯×¢²á½øIOC
+    æ³¨æ„æ¥å£å®ç°ILunaServiceæ‰èƒ½è¢«è‡ªåŠ¨æ³¨å†Œè¿›IOC
 
-Èç¹û²»Ï²»¶ÓÃnlogµÄ»°,¿ÉÒÔ²é¿´Castle.WindsorÎÄµµĞŞ¸ÄµÚ3²½ÖĞAddFacility·½·¨
+å¦‚æœä¸å–œæ¬¢ç”¨nlogçš„è¯,å¯ä»¥æŸ¥çœ‹Castle.Windsoræ–‡æ¡£ä¿®æ”¹ç¬¬3æ­¥ä¸­AddFacilityæ–¹æ³•
 
-## ¹ØÓÚweb°üÊ¹ÓÃ
-ĞŞ¸ÄStartup´úÂë
+## å…³äºwebåŒ…ä½¿ç”¨
+ä¿®æ”¹Startupä»£ç 
 ```
 public IServiceProvider ConfigureServices(IServiceCollection services)
 {
@@ -52,15 +52,15 @@ public IServiceProvider ConfigureServices(IServiceCollection services)
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
 	...
-	// ÔÚUseMvcÖ®Ç°µ÷ÓÃ
+	// åœ¨UseMvcä¹‹å‰è°ƒç”¨
 	app.UseLuna();
 	...
 }
 ```
 
-**ÏîÄ¿Ô¼¶¨: ÄãµÄ³ÌĞòÃüÃû±ØĞë×ñÑ­aaa.bb.cµÄ·½Ê½**
+**é¡¹ç›®çº¦å®š: ä½ çš„ç¨‹åºå‘½åå¿…é¡»éµå¾ªaaa.bb.cçš„æ–¹å¼**
 ```
- Demo.App        <- Ó¦ÓÃ³ÌĞòÈë¿Ú
- Demo.Service    <- ·şÎñ²ã
- Demo.Entity     <- ÊµÌå²ã
+ Demo.App        <- åº”ç”¨ç¨‹åºå…¥å£
+ Demo.Service    <- æœåŠ¡å±‚
+ Demo.Entity     <- å®ä½“å±‚
 ```
