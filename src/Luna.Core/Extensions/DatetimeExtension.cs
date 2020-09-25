@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Luna.Extensions
 {
@@ -25,15 +23,9 @@ namespace Luna.Extensions
         {
             var end = dt;
             var endDayOfWeek = startDayOfWeek - 1;
-            if (endDayOfWeek < 0)
-            {
-                endDayOfWeek = DayOfWeek.Saturday;
-            }
+            if (endDayOfWeek < 0) endDayOfWeek = DayOfWeek.Saturday;
 
-            if (end.DayOfWeek != endDayOfWeek)
-            {
-                end = endDayOfWeek < end.DayOfWeek ? end.AddDays(7 - (end.DayOfWeek - endDayOfWeek)) : end.AddDays(endDayOfWeek - end.DayOfWeek);
-            }
+            if (end.DayOfWeek != endDayOfWeek) end = endDayOfWeek < end.DayOfWeek ? end.AddDays(7 - (end.DayOfWeek - endDayOfWeek)) : end.AddDays(endDayOfWeek - end.DayOfWeek);
 
             return new DateTime(end.Year, end.Month, end.Day, 23, 59, 59, 999);
         }

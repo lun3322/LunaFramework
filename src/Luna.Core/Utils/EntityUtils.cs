@@ -8,10 +8,7 @@ namespace Luna.Utils
     {
         public static Type GetPrimaryKeyType(Type type)
         {
-            if (!type.IsImplementedGeneric(typeof(IEntity<>)))
-            {
-                throw new ArgumentException($"{nameof(type)}参数未实现IEntity<>");
-            }
+            if (!type.IsImplementedGeneric(typeof(IEntity<>))) throw new ArgumentException($"{nameof(type)}参数未实现IEntity<>");
 
             var propertyInfo = type.GetProperty("Id");
             return propertyInfo.PropertyType;

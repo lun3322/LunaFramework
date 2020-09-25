@@ -9,16 +9,16 @@ namespace Luna.Caching
 {
     public class DefaultLunaCaching : ILunaCaching
     {
+        private readonly HashSet<string> _cacheKeys;
+        private readonly object _lockObj = new object();
         private readonly MemoryCache _memoryCache;
         private readonly Random _random;
-        private readonly HashSet<string> _cackeKeys;
-        private readonly object _lockObj = new object();
 
         public DefaultLunaCaching()
         {
             _memoryCache = new MemoryCache(new MemoryCacheOptions());
             _random = new Random();
-            _cackeKeys = new HashSet<string>();
+            _cacheKeys = new HashSet<string>();
         }
 
         public void Set<T>([NotNull] string cacheKey, [NotNull] T cacheValue) where T : class
@@ -36,15 +36,11 @@ namespace Luna.Caching
 
             lock (_lockObj)
             {
-                _cackeKeys.Add(cacheKey);
-                if (expiration == default(TimeSpan))
-                {
+                _cacheKeys.Add(cacheKey);
+                if (expiration == default)
                     _memoryCache.Set(cacheKey, cacheValue);
-                }
                 else
-                {
                     _memoryCache.Set(cacheKey, cacheValue, GetExpirationWithRandom(expiration));
-                }
             }
         }
 
@@ -128,7 +124,7 @@ namespace Luna.Caching
 
             lock (_lockObj)
             {
-                _cackeKeys.Remove(cacheKey);
+                _cacheKeys.Remove(cacheKey);
                 _memoryCache.Remove(cacheKey);
             }
         }
@@ -146,11 +142,8 @@ namespace Luna.Caching
 
             lock (_lockObj)
             {
-                var tryGetValue = _memoryCache.TryGetValue(cacheKey, out var _);
-                if (!tryGetValue)
-                {
-                    _cackeKeys.Remove(cacheKey);
-                }
+                var tryGetValue = _memoryCache.TryGetValue(cacheKey, out _);
+                if (!tryGetValue) _cacheKeys.Remove(cacheKey);
 
                 return tryGetValue;
             }
@@ -170,13 +163,10 @@ namespace Luna.Caching
             List<string> keys;
             lock (_lockObj)
             {
-                keys = _cackeKeys.Where(m => m.StartsWith(prefix)).ToList();
+                keys = _cacheKeys.Where(m => m.StartsWith(prefix)).ToList();
             }
 
-            foreach (var key in keys)
-            {
-                Remove(key);
-            }
+            foreach (var key in keys) Remove(key);
         }
 
         public async Task RemoveByPrefixAsync([NotNull] string prefix)
@@ -197,10 +187,7 @@ namespace Luna.Caching
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            foreach (var kv in value)
-            {
-                Set(kv.Key, kv.Value, expiration);
-            }
+            foreach (var kv in value) Set(kv.Key, kv.Value, expiration);
         }
 
         public async Task SetAllAsync<T>([NotNull] IDictionary<string, T> value) where T : class
@@ -214,10 +201,7 @@ namespace Luna.Caching
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            foreach (var kv in value)
-            {
-                await SetAsync(kv.Key, kv.Value, expiration);
-            }
+            foreach (var kv in value) await SetAsync(kv.Key, kv.Value, expiration);
         }
 
         public IDictionary<string, T> GetAll<T>([NotNull] IEnumerable<string> cacheKeys) where T : class
@@ -249,14 +233,11 @@ namespace Luna.Caching
             List<string> keys;
             lock (_lockObj)
             {
-                keys = _cackeKeys.Where(m => m.StartsWith(prefix)).ToList();
+                keys = _cacheKeys.Where(m => m.StartsWith(prefix)).ToList();
             }
 
             var dic = new Dictionary<string, T>();
-            foreach (var key in keys)
-            {
-                dic.Add(key, Get<T>(key));
-            }
+            foreach (var key in keys) dic.Add(key, Get<T>(key));
 
             return dic;
         }
@@ -272,10 +253,7 @@ namespace Luna.Caching
         {
             if (cacheKeys == null) throw new ArgumentNullException(nameof(cacheKeys));
 
-            foreach (var cacheKey in cacheKeys)
-            {
-                Remove(cacheKey);
-            }
+            foreach (var cacheKey in cacheKeys) Remove(cacheKey);
         }
 
         public async Task RemoveAllAsync([NotNull] IEnumerable<string> cacheKeys)
@@ -291,17 +269,13 @@ namespace Luna.Caching
 
             lock (_lockObj)
             {
-                var list = _cackeKeys.Where(m => m.StartsWith(prefix)).ToList();
+                var list = _cacheKeys.Where(m => m.StartsWith(prefix)).ToList();
 
                 foreach (var s in list)
-                {
-                    if (!_memoryCache.TryGetValue(s, out var _))
-                    {
-                        _cackeKeys.Remove(s);
-                    }
-                }
+                    if (!_memoryCache.TryGetValue(s, out _))
+                        _cacheKeys.Remove(s);
 
-                return _cackeKeys.Count(m => m.StartsWith(prefix));
+                return _cacheKeys.Count(m => m.StartsWith(prefix));
             }
         }
 

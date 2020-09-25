@@ -12,96 +12,88 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Luna.SnowflakeId
 {
     public class SnowflakeIdWorker
     {
         /// <summary>
-        /// 开始时间截 (2015-01-01)
+        ///     开始时间截 (2015-01-01)
         /// </summary>
         private const long Twepoch = 1420041600000L;
 
-        /// <summary>
-        /// 机器id所占的位数
-        /// </summary>
-        private static int WorkerIdBits => 5;
+        private static readonly object LockObj = new object();
 
         /// <summary>
-        /// 数据标识id所占的位数
-        /// </summary>
-        private static int DatacenterIdBits => 5;
-
-        /// <summary>
-        /// 支持的最大机器id，结果是31 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数)
-        /// </summary>
-        private readonly long _maxWorkerId = -1L ^ (-1L << WorkerIdBits);
-
-        /// <summary>
-        /// 支持的最大数据标识id，结果是31
-        /// </summary>
-        private readonly long _maxDatacenterId = -1L ^ (-1L << DatacenterIdBits);
-
-        /// <summary>
-        /// 序列在id中占的位数
-        /// </summary>
-        private static int SequenceBits => 12;
-
-        /// <summary>
-        /// 机器ID向左移12位
-        /// </summary>
-        private readonly int _workerIdShift = SequenceBits;
-
-        /// <summary>
-        /// 数据标识id向左移17位(12+5)
+        ///     数据标识id向左移17位(12+5)
         /// </summary>
         private readonly int _datacenterIdShift = SequenceBits + WorkerIdBits;
 
         /// <summary>
-        /// 时间截向左移22位(5+5+12)
+        ///     支持的最大数据标识id，结果是31
         /// </summary>
-        private readonly int _timestampLeftShift = SequenceBits + WorkerIdBits + DatacenterIdBits;
+        private readonly long _maxDatacenterId = -1L ^ (-1L << DatacenterIdBits);
 
         /// <summary>
-        /// 生成序列的掩码，这里为4095 (0b111111111111=0xfff=4095)
+        ///     支持的最大机器id，结果是31 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数)
+        /// </summary>
+        private readonly long _maxWorkerId = -1L ^ (-1L << WorkerIdBits);
+
+        /// <summary>
+        ///     生成序列的掩码，这里为4095 (0b111111111111=0xfff=4095)
         /// </summary>
         private readonly long _sequenceMask = -1L ^ (-1L << SequenceBits);
 
         /// <summary>
-        /// 毫秒内序列(0~4095)
+        ///     时间截向左移22位(5+5+12)
         /// </summary>
-        private long _sequence;
+        private readonly int _timestampLeftShift = SequenceBits + WorkerIdBits + DatacenterIdBits;
 
         /// <summary>
-        /// 上次生成ID的时间截
+        ///     机器ID向左移12位
+        /// </summary>
+        private readonly int _workerIdShift = SequenceBits;
+
+        /// <summary>
+        ///     上次生成ID的时间截
         /// </summary>
         private long _lastTimestamp = -1L;
 
-        private long WorkerId { get; }
-        private long DataCenterId { get; }
-
-        private static readonly object LockObj = new object();
+        /// <summary>
+        ///     毫秒内序列(0~4095)
+        /// </summary>
+        private long _sequence;
 
         public SnowflakeIdWorker(long workerId, long datacenterId)
         {
-            if (workerId > _maxWorkerId || workerId < 0)
-            {
-                throw new ArgumentException($"worker Id can't be greater than {_maxWorkerId} or less than 0");
-            }
+            if (workerId > _maxWorkerId || workerId < 0) throw new ArgumentException($"worker Id can't be greater than {_maxWorkerId} or less than 0");
 
-            if (datacenterId > _maxDatacenterId || datacenterId < 0)
-            {
-                throw new ArgumentException($"datacenter Id can't be greater than {_maxDatacenterId} or less than 0");
-            }
+            if (datacenterId > _maxDatacenterId || datacenterId < 0) throw new ArgumentException($"datacenter Id can't be greater than {_maxDatacenterId} or less than 0");
 
             WorkerId = workerId;
             DataCenterId = datacenterId;
         }
 
         /// <summary>
-        /// 获得下一个ID (该方法是线程安全的)
+        ///     机器id所占的位数
+        /// </summary>
+        private static int WorkerIdBits => 5;
+
+        /// <summary>
+        ///     数据标识id所占的位数
+        /// </summary>
+        private static int DatacenterIdBits => 5;
+
+        /// <summary>
+        ///     序列在id中占的位数
+        /// </summary>
+        private static int SequenceBits => 12;
+
+        private long WorkerId { get; }
+        private long DataCenterId { get; }
+
+        /// <summary>
+        ///     获得下一个ID (该方法是线程安全的)
         /// </summary>
         /// <returns></returns>
         public long NextId()
@@ -113,7 +105,7 @@ namespace Luna.SnowflakeId
         }
 
         /// <summary>
-        /// 获得下一个ID
+        ///     获得下一个ID
         /// </summary>
         /// <returns></returns>
         private long GenerateId()
@@ -121,10 +113,7 @@ namespace Luna.SnowflakeId
             var timestamp = TimeGen();
 
             //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
-            if (timestamp < _lastTimestamp)
-            {
-                throw new Exception($"Clock moved backwards.  Refusing to generate id for {_lastTimestamp - timestamp} milliseconds");
-            }
+            if (timestamp < _lastTimestamp) throw new Exception($"Clock moved backwards.  Refusing to generate id for {_lastTimestamp - timestamp} milliseconds");
 
             //如果是同一时间生成的，则进行毫秒内序列
             if (_lastTimestamp == timestamp)
@@ -132,10 +121,8 @@ namespace Luna.SnowflakeId
                 _sequence = (_sequence + 1) & _sequenceMask;
                 //毫秒内序列溢出
                 if (_sequence == 0)
-                {
                     //阻塞到下一个毫秒,获得新的时间戳
                     timestamp = TilNextMillis(_lastTimestamp);
-                }
             }
             //时间戳改变，毫秒内序列重置
             else
@@ -154,7 +141,7 @@ namespace Luna.SnowflakeId
         }
 
         /// <summary>
-        /// 返回以毫秒为单位的当前时间
+        ///     返回以毫秒为单位的当前时间
         /// </summary>
         /// <returns></returns>
         private long TimeGen()
@@ -164,17 +151,14 @@ namespace Luna.SnowflakeId
         }
 
         /// <summary>
-        /// 阻塞到下一个毫秒，直到获得新的时间戳
+        ///     阻塞到下一个毫秒，直到获得新的时间戳
         /// </summary>
         /// <param name="lastTimes">上次生成ID的时间截</param>
         /// <returns>当前时间戳</returns>
         private long TilNextMillis(long lastTimes)
         {
             var timestamp = TimeGen();
-            while (timestamp <= lastTimes)
-            {
-                timestamp = TimeGen();
-            }
+            while (timestamp <= lastTimes) timestamp = TimeGen();
 
             return timestamp;
         }

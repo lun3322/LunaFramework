@@ -7,7 +7,7 @@ namespace Luna.Linq.Extensions
     public static class QueryableExtensions
     {
         /// <summary>
-        /// 分页
+        ///     分页
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
         /// <typeparam name="TKey"></typeparam>
@@ -33,7 +33,7 @@ namespace Luna.Linq.Extensions
         }
 
         /// <summary>
-        /// 条件查询
+        ///     条件查询
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>

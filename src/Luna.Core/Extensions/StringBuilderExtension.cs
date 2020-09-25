@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace Luna.Extensions
 {
@@ -30,13 +28,8 @@ namespace Luna.Extensions
 
                 char nextChar;
                 if (allowEscape && ch == '\\' && startIndex < @this.Length && ((nextChar = @this[startIndex]) == '\\' || nextChar == '"'))
-                {
                     startIndex++;
-                }
-                else if (ch == '"')
-                {
-                    return startIndex;
-                }
+                else if (ch == '"') return startIndex;
             }
 
             return startIndex;
@@ -66,13 +59,8 @@ namespace Luna.Extensions
 
                 char nextChar;
                 if (allowEscape && ch == '\\' && startIndex < @this.Length && ((nextChar = @this[startIndex]) == '\\' || nextChar == '\''))
-                {
                     startIndex++;
-                }
-                else if (ch == '\'')
-                {
-                    return startIndex;
-                }
+                else if (ch == '\'') return startIndex;
             }
 
             return startIndex;

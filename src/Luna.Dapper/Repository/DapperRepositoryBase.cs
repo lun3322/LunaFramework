@@ -1,10 +1,9 @@
-﻿using Dapper.FastCrud;
-using Luna.Repository;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper.FastCrud;
+using Luna.Repository;
 
 namespace Luna.Dapper.Repository
 {
@@ -12,6 +11,7 @@ namespace Luna.Dapper.Repository
         where TEntity : class, IEntity<TPrimaryKey>, new()
     {
         private readonly IDbConnection _connection;
+
         protected DapperRepositoryBase(IDbConnection dbConnection)
         {
             _connection = dbConnection;
@@ -41,7 +41,7 @@ namespace Luna.Dapper.Repository
         {
             using (var dbConnection = GetConnection())
             {
-                return dbConnection.Get(new TEntity { Id = id });
+                return dbConnection.Get(new TEntity {Id = id});
             }
         }
 
@@ -96,7 +96,7 @@ namespace Luna.Dapper.Repository
         {
             using (var dbConnection = GetConnection())
             {
-                dbConnection.Delete(new TEntity { Id = id });
+                dbConnection.Delete(new TEntity {Id = id});
             }
         }
 

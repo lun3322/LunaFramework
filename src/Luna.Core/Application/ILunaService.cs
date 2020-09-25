@@ -2,7 +2,7 @@
 
 namespace Luna.Application
 {
-    public interface ILunaService : ITransientDependency
+    public interface ILunaService : IScopedDependency
     {
     }
 }

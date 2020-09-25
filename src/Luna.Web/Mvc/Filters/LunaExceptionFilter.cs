@@ -2,38 +2,32 @@
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
-using Castle.Core.Logging;
 using Luna.Application.Dto;
 using Luna.Dependency;
 using Luna.Exceptions;
 using Luna.Web.Mvc.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace Luna.Web.Mvc.Filters
 {
     public class LunaExceptionFilter : ExceptionFilterAttribute, ISingletonDependency
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<LunaExceptionFilter> _logger;
 
-        public LunaExceptionFilter(ILogger logger)
+        public LunaExceptionFilter(ILogger<LunaExceptionFilter> logger)
         {
             _logger = logger;
         }
 
         public override void OnException(ExceptionContext context)
         {
-            _logger.Error(context.Exception.ToString());
-            if (!context.ActionDescriptor.IsControllerAction())
-            {
-                return;
-            }
+            _logger.LogError(context.Exception.ToString());
+            if (!context.ActionDescriptor.IsControllerAction()) return;
 
             // 判断返回值类型
-            if (!IsObjectResult(context.ActionDescriptor.GetMethodInfo().ReturnType))
-            {
-                return;
-            }
+            if (!IsObjectResult(context.ActionDescriptor.GetMethodInfo().ReturnType)) return;
 
             if (context.Exception is LunaUserFriendlyException ex)
             {

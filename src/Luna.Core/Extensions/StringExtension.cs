@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Security.Cryptography;
@@ -20,7 +19,7 @@ namespace Luna.Extensions
             var cspp = new CspParameters {KeyContainerName = key};
             var rsa = new RSACryptoServiceProvider(cspp) {PersistKeyInCsp = true};
             var decryptArray = @this.Split(new[] {"-"}, StringSplitOptions.None);
-            var decryptByteArray = Array.ConvertAll(decryptArray, (s => Convert.ToByte(byte.Parse(s, NumberStyles.HexNumber))));
+            var decryptByteArray = Array.ConvertAll(decryptArray, s => Convert.ToByte(byte.Parse(s, NumberStyles.HexNumber)));
             var bytes = rsa.Decrypt(decryptByteArray, true);
 
             return Encoding.UTF8.GetString(bytes);

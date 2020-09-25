@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -20,10 +18,7 @@ namespace Luna.Extensions
             using var md5 = MD5.Create();
             var hashBytes = md5.ComputeHash(@this);
             var sb = new StringBuilder();
-            foreach (var bytes in hashBytes)
-            {
-                sb.Append(bytes.ToString("X2"));
-            }
+            foreach (var bytes in hashBytes) sb.Append(bytes.ToString("X2"));
 
             return sb.ToString();
         }

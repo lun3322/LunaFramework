@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Castle.Core.Logging;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace Luna.Web.Mvc.Middleware
 {
@@ -16,7 +14,7 @@ namespace Luna.Web.Mvc.Middleware
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, ILogger logger)
+        public async Task InvokeAsync(HttpContext context, ILogger<LunaExceptionLogMiddleware> logger)
         {
             try
             {
@@ -24,7 +22,7 @@ namespace Luna.Web.Mvc.Middleware
             }
             catch (Exception e)
             {
-                logger.Error(e.ToString());
+                logger.LogError(e.ToString());
                 throw;
             }
         }

@@ -1,65 +1,61 @@
-﻿using Castle.Core.Logging;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Luna.Dependency;
-using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Luna
 {
-    public class LunaStarter : IDisposable
+    public class LunaStarter
     {
-        private ILogger _logger;
-        public IIocManager IocManager { get; private set; }
+        private readonly IServiceCollection _serviceCollection;
 
-        private LunaStarter(Type entryType, LunaStarterOption option)
+        private LunaStarter(IServiceCollection services, Type entryType, LunaStarterOption option)
         {
-            IocManager = option.IocManager;
+            _serviceCollection = services;
 
-            IocManager.RegisterAssemblyByConvention(typeof(LunaStarter).Assembly);
-            IocManager.RegisterAssemblyByConvention(entryType.Assembly);
+            var mainDomain = entryType.FullName.Split(".").First();
 
-            _logger = NullLogger.Instance;
+            var allAssembly = GetReferencedAssemblies(entryType, mainDomain);
+
+            var allModule = TypeFinder.FindModulesInAssemblyList(allAssembly);
+
+            var dependencyRegister = new DependencyRegister(_serviceCollection);
+            dependencyRegister.RegisterModules(allModule);
+
+            InitializeModule(allModule);
         }
 
-        public static LunaStarter Create<T>(Action<LunaStarterOption> action = null, bool isRun = false)
-            where T : class
+        public static LunaStarter Create<T>(IServiceCollection services, Action<LunaStarterOption> action = null, bool isRun = false)
+            where T : LunaModule
         {
             var option = new LunaStarterOption();
-            if (isRun)
-            {
-                action?.Invoke(option);
-            }
+            if (isRun) action?.Invoke(option);
 
-            return new LunaStarter(typeof(T), option);
+            var start = new LunaStarter(services, typeof(T), option);
+            services.AddSingleton(typeof(LunaStarter), start);
+            return start;
         }
 
-        public void Initialize()
+        private static List<Assembly> GetReferencedAssemblies(Type entryType, string mainDomain)
         {
-            ResolveLogger();
-            LunaConfigurationRegister.Initialize(IocManager);
-
-            var configurations = IocManager.IocContainer.ResolveAll<ILunaConfiguration>();
-            _logger.Info($"找到 {configurations.Length} 个 LunaConfiguration");
-
-            foreach (var configuration in configurations)
-            {
-                configuration.Initialize();
-            }
-
-            foreach (var configuration in configurations)
-            {
-                configuration.Setup();
-            }
+            var allAssembly = new List<Assembly> {entryType.Assembly};
+            var referencedAssemblies = entryType.Assembly
+                .GetReferencedAssemblies()
+                .Where(m => m.FullName.StartsWith(mainDomain) || m.FullName.StartsWith(nameof(Luna)));
+            allAssembly.AddRange(referencedAssemblies.Select(Assembly.Load));
+            return allAssembly;
         }
 
-        public void Dispose()
+        private void InitializeModule(List<Type> moduleList)
         {
-            IocManager?.Dispose();
-        }
-
-        private void ResolveLogger()
-        {
-            if (IocManager.IsRegistered<ILoggerFactory>())
+            foreach (var module in moduleList)
             {
-                _logger = IocManager.Resolve<ILoggerFactory>().Create(typeof(LunaStarter));
+                var instance = Activator.CreateInstance(module) as LunaModule;
+                if (instance == null) throw new Exception($"Can't instantiation type {module.FullName}");
+
+                instance.ConfigureServices(_serviceCollection);
             }
         }
     }

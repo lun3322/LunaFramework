@@ -9,14 +9,14 @@ using Luna.Application.Dto;
 namespace Luna.Dapper
 {
     /// <summary>
-    /// PagedExtension
+    ///     PagedExtension
     /// </summary>
     public static class PagedExtension
     {
         private static readonly Regex REPLACE_SELECT_SQL_TO_COUNT_SQL = new Regex("SELECT.+?FROM", RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
         /// <summary>
-        /// 分页方法
+        ///     分页方法
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="connection"></param>
@@ -29,10 +29,7 @@ namespace Luna.Dapper
         public static (List<T> data, int count) GetPagedList<T>(this IDbConnection connection, string selectSql, string conditionSql, string sortField,
             object param, IDbTransaction transaction = null)
         {
-            if (!(param is RequestPagedVm))
-            {
-                throw new Exception($"{nameof(param)}参数类型错误");
-            }
+            if (!(param is RequestPaged)) throw new Exception($"{nameof(param)}参数类型错误");
 
             var sql = $@"
 {GetPagedSql(selectSql, conditionSql, sortField)}
@@ -45,7 +42,7 @@ namespace Luna.Dapper
         }
 
         /// <summary>
-        /// 分页方法
+        ///     分页方法
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="selectSql"></param>
@@ -58,10 +55,7 @@ namespace Luna.Dapper
         public static (List<T> data, int count) GetPagedList<T>(this IDbConnection connection, string selectSql, string sortField,
             object param, IDbTransaction transaction = null)
         {
-            if (!(param is RequestPagedVm))
-            {
-                throw new Exception($"{nameof(param)}参数类型错误");
-            }
+            if (!(param is RequestPaged)) throw new Exception($"{nameof(param)}参数类型错误");
 
             var countSql = REPLACE_SELECT_SQL_TO_COUNT_SQL.Replace(selectSql, "SELECT COUNT(1) FROM");
 
@@ -77,7 +71,7 @@ namespace Luna.Dapper
 
 
         /// <summary>
-        /// 总数sql
+        ///     总数sql
         /// </summary>
         /// <param name="conditionSql"></param>
         /// <returns></returns>
@@ -89,7 +83,7 @@ SELECT COUNT(1)
         }
 
         /// <summary>
-        /// 分页语句
+        ///     分页语句
         /// </summary>
         /// <param name="selectSql"></param>
         /// <param name="conditionSql"></param>
@@ -105,7 +99,7 @@ OFFSET (@pageIndex - 1) * @pageSize ROWS FETCH NEXT @pageSize ROWS ONLY;";
         }
 
         /// <summary>
-        /// 分页语句
+        ///     分页语句
         /// </summary>
         /// <param name="selectSql"></param>
         /// <param name="sortField"></param>

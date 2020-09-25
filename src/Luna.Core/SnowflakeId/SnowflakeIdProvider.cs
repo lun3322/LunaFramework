@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Luna.Dependency;
-
-namespace Luna.SnowflakeId
+﻿namespace Luna.SnowflakeId
 {
     public class SnowflakeIdProvider : ISnowflakeIdProvider
     {
         /// <summary>
-        /// 获取 worker
+        ///     获取 worker
         /// </summary>
         /// <returns></returns>
         public SnowflakeIdWorker GetWorker()
@@ -17,7 +12,7 @@ namespace Luna.SnowflakeId
         }
 
         /// <summary>
-        /// 获取 worker
+        ///     获取 worker
         /// </summary>
         /// <returns></returns>
         public SnowflakeIdWorker GetWorker(long workerId, long datacenterId)

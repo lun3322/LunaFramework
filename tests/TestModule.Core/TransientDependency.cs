@@ -1,0 +1,8 @@
+﻿using Luna.Dependency;
+
+namespace TestModule.Core
+{
+    public class TransientDependency : ITransientDependency
+    {
+    }
+}
