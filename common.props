@@ -1,10 +1,10 @@
 ﻿<Project>
-  <PropertyGroup>
-    <Version>0.6.4</Version>
-    <Authors>chenhongbo</Authors>
-    <PackageProjectUrl>https://github.com/lun3322/LunaFramework</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lun3322/LunaFramework</RepositoryUrl> 
-    <PackageOutputPath>..\..\package\</PackageOutputPath>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Version>1.0.0</Version>
+        <Authors>chenhongbo</Authors>
+        <PackageProjectUrl>https://github.com/lun3322/LunaFramework</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/lun3322/LunaFramework</RepositoryUrl>
+        <PackageOutputPath>..\..\package\</PackageOutputPath>
+    </PropertyGroup>
 
 </Project>
