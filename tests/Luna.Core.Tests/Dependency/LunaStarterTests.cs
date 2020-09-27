@@ -11,7 +11,7 @@ namespace Luna.Core.Tests.Dependency
         public LunaStarterTests()
         {
             var serviceCollection = new ServiceCollection();
-            var starter = LunaStarter.Create<TestModuleEntryModule>(serviceCollection);
+            var starter = LunaStarter.StartUp<TestModuleEntryModule>(serviceCollection);
 
             _provider = serviceCollection.BuildServiceProvider();
         }

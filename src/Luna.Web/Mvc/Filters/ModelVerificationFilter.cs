@@ -11,7 +11,7 @@ namespace Luna.Web.Mvc.Filters
     /// <summary>
     ///     模型验证
     /// </summary>
-    public class ModelVerificationFilter : IActionFilter, ISingletonDependency
+    public class ModelVerificationFilter : IActionFilter, IScopedDependency
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {

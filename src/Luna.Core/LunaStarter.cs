@@ -27,7 +27,7 @@ namespace Luna
             InitializeModule(allModule);
         }
 
-        public static LunaStarter Create<T>(IServiceCollection services, Action<LunaStarterOption> action = null, bool isRun = false)
+        public static LunaStarter StartUp<T>(IServiceCollection services, Action<LunaStarterOption> action = null, bool isRun = false)
             where T : LunaModule
         {
             var option = new LunaStarterOption();

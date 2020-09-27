@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Luna.Core\Luna.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mvc\Middleware" />
+  </ItemGroup>
+
 </Project>

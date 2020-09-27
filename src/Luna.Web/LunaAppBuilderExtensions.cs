@@ -1,5 +1,4 @@
-﻿using Luna.Web.Mvc.Middleware;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 
 namespace Luna.Web
 {
@@ -7,8 +6,6 @@ namespace Luna.Web
     {
         public static IApplicationBuilder UseLuna(this IApplicationBuilder app)
         {
-            app.UseMiddleware<LunaExceptionLogMiddleware>();
-
             return app;
         }
     }
