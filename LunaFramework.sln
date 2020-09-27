@@ -11,12 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EF8771BD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B9033F1-733E-4A5A-9C4C-8F3B034F286B}"
 	ProjectSection(SolutionItems) = preProject
-		buildpackage.bat = buildpackage.bat
 		common.props = common.props
 		README.md = README.md
 		.travis.yml = .travis.yml
 		publishToNuget.bat = publishToNuget.bat
 		publish2Nuget.sh = publish2Nuget.sh
+		buildpackage.bat = buildpackage.bat
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Web", "src\Luna.Web\Luna.Web.csproj", "{872AF27D-2F58-434E-AB72-7ED27BA3364F}"

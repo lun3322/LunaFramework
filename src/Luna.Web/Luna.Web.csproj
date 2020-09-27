@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\common.props" />
+    <Import Project="..\..\common.props"/>
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Luna.Core\Luna.Core.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Luna.Core\Luna.Core.csproj"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mvc\Middleware" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Mvc\Middleware"/>
+    </ItemGroup>
 
 </Project>
