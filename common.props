@@ -4,6 +4,7 @@
         <Authors>chenhongbo</Authors>
         <PackageProjectUrl>https://github.com/lun3322/LunaFramework</PackageProjectUrl>
         <RepositoryUrl>https://github.com/lun3322/LunaFramework</RepositoryUrl>
+        <PackageLicenseUrl>https://github.com/lun3322/LunaFramework/blob/master/LICENSE</PackageLicenseUrl>
         <PackageOutputPath>..\..\package\</PackageOutputPath>
     </PropertyGroup>
 

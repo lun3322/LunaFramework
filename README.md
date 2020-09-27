@@ -1,33 +1,26 @@
 # LunaFramework [![Build Status](https://travis-ci.com/lun3322/LunaFramework.svg?branch=master)](https://travis-ci.com/lun3322/LunaFramework)
 
-## myget源
-https://www.myget.org/F/luna/api/v3/index.json
+## 添加依赖
 ```
 Install-Package Luna
-Install-Package Luna.Castle.Nlog
 Install-Package Luna.Web
+Install-Package Luna.Dapper
+Install-Package Luna.MongoDb
 ```
 
 ## 关于使用
-1. 如果你也使用nlog写日志的话可以直接引用 Luna.Service.Nlog 包.关于日志的一个配置会自动加载到项目中
-2. 在Main方法中新增代码
+1. 在Main方法中新增代码
     ```
-	using (var starter = LunaStarter.Create<Program>())
-	{
-		starter.IocManager.IocContainer.AddFacility<LoggingFacility>(m =>
-			m.LogUsing<NLogFactory>().WithConfig("NLog.config"));
-
-		starter.Initialize();
-	}
+   LunaStarter.StartUp<LunaModule>()
     ```
-1. 增加你的service像下面这样
+1. service写法
     ```
-    public interface IDemoService : ILunaService
+    public interface IDemoService
     {
     	string GetMessage();
     }
     
-    public class DemoService : LunaService, IDemoService
+    public class DemoService :IDemoService, ILunaService
     {
     	public string GetMessage()
     	{
@@ -38,15 +31,14 @@ Install-Package Luna.Web
     ```
     注意接口实现ILunaService才能被自动注册进IOC
 
-如果不喜欢用nlog的话,可以查看Castle.Windsor文档修改第3步中AddFacility方法
 
 ## 关于web包使用
 修改Startup代码
 ```
-public IServiceProvider ConfigureServices(IServiceCollection services)
+public void ConfigureServices(IServiceCollection services)
 {
-	...
-	return services.AddLuna<Startup>();
+    ...
+    services.AddLuna<SampleWebModule>(opt => { opt.EnableLunaModelValid = false; });
 }
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
