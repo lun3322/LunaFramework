@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Web", "samples\Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Core", "samples\Sample.Core\Sample.Core.csproj", "{0810CD7F-3045-407F-ACBE-8E3419D40887}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Dapper.Tests", "tests\Luna.Dapper.Tests\Luna.Dapper.Tests.csproj", "{3CA610C4-1930-4AE4-9B74-32FC5FFA1827}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{0810CD7F-3045-407F-ACBE-8E3419D40887}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0810CD7F-3045-407F-ACBE-8E3419D40887}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0810CD7F-3045-407F-ACBE-8E3419D40887}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CA610C4-1930-4AE4-9B74-32FC5FFA1827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CA610C4-1930-4AE4-9B74-32FC5FFA1827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CA610C4-1930-4AE4-9B74-32FC5FFA1827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CA610C4-1930-4AE4-9B74-32FC5FFA1827}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{C3E80EE1-0084-4662-B361-849E52D7A6B2} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 		{5A9708DC-871E-4318-99BF-6BFEB752E6AA} = {728B51ED-B227-4CC8-94E7-379BFB17CC61}
 		{0810CD7F-3045-407F-ACBE-8E3419D40887} = {728B51ED-B227-4CC8-94E7-379BFB17CC61}
+		{3CA610C4-1930-4AE4-9B74-32FC5FFA1827} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B76D42F-3CEF-4DB9-9960-27AE2EC91B8F}

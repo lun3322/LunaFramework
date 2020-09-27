@@ -2,7 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper.FastCrud;
+using Dapper;
 using Luna.Repository;
 
 namespace Luna.Dapper.Repository
@@ -26,97 +26,89 @@ namespace Luna.Dapper.Repository
 
         public List<TEntity> GetAllList()
         {
-            using (var dbConnection = GetConnection())
-            {
-                return dbConnection.Find<TEntity>().ToList();
-            }
+            using var dbConnection = GetConnection();
+            return dbConnection.GetList<TEntity>().ToList();
         }
 
-        public Task<List<TEntity>> GetAllListAsync()
+        public async Task<List<TEntity>> GetAllListAsync()
         {
-            return Task.FromResult(GetAllList());
+            using var dbConnection = GetConnection();
+            var listAsync = await dbConnection.GetListAsync<TEntity>();
+            return listAsync.ToList();
         }
 
         public TEntity Get(TPrimaryKey id)
         {
-            using (var dbConnection = GetConnection())
-            {
-                return dbConnection.Get(new TEntity {Id = id});
-            }
+            using var dbConnection = GetConnection();
+            return dbConnection.Get<TEntity>(id);
         }
 
-        public Task<TEntity> GetAsync(TPrimaryKey id)
+        public async Task<TEntity> GetAsync(TPrimaryKey id)
         {
-            return Task.FromResult(Get(id));
+            using var dbConnection = GetConnection();
+            return await dbConnection.GetAsync<TEntity>(id);
         }
 
         public TPrimaryKey Insert(TEntity entity)
         {
-            using (var dbConnection = GetConnection())
-            {
-                dbConnection.Insert(entity);
-                return entity.Id;
-            }
+            using var dbConnection = GetConnection();
+            dbConnection.Insert(entity);
+            return entity.Id;
         }
 
-        public Task<TPrimaryKey> InsertAsync(TEntity entity)
+        public async Task<TPrimaryKey> InsertAsync(TEntity entity)
         {
-            return Task.FromResult(Insert(entity));
+            using var dbConnection = GetConnection();
+            await dbConnection.InsertAsync(entity);
+            return entity.Id;
         }
 
         public void Update(TEntity entity)
         {
-            using (var dbConnection = GetConnection())
-            {
-                dbConnection.Update(entity);
-            }
+            using var dbConnection = GetConnection();
+            dbConnection.Update(entity);
         }
 
-        public Task UpdateAsync(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
-            Update(entity);
-            return Task.CompletedTask;
+            using var dbConnection = GetConnection();
+            await dbConnection.UpdateAsync(entity);
         }
 
         public void Delete(TEntity entity)
         {
-            using (var dbConnection = GetConnection())
-            {
-                dbConnection.Delete(entity);
-            }
+            using var dbConnection = GetConnection();
+            dbConnection.Delete(entity);
         }
 
-        public Task DeleteAsync(TEntity entity)
+        public async Task DeleteAsync(TEntity entity)
         {
-            Delete(entity);
-            return Task.CompletedTask;
+            using var dbConnection = GetConnection();
+            await dbConnection.DeleteAsync(entity);
         }
 
         public void Delete(TPrimaryKey id)
         {
-            using (var dbConnection = GetConnection())
-            {
-                dbConnection.Delete(new TEntity {Id = id});
-            }
+            using var dbConnection = GetConnection();
+            dbConnection.Delete(new TEntity {Id = id});
         }
 
-        public Task DeleteAsync(TPrimaryKey id)
+        public async Task DeleteAsync(TPrimaryKey id)
         {
-            Delete(id);
-            return Task.CompletedTask;
+            using var dbConnection = GetConnection();
+            await dbConnection.DeleteAsync(new TEntity {Id = id});
         }
 
         public int Count()
         {
-            using (var dbConnection = GetConnection())
-            {
-                return dbConnection.Count<TEntity>();
-            }
+            using var dbConnection = GetConnection();
+            return dbConnection.RecordCount<TEntity>();
         }
 
-        public Task<int> CountAsync()
+        public async Task<int> CountAsync()
         {
-            return Task.FromResult(Count());
+            using var dbConnection = GetConnection();
+            return await dbConnection.RecordCountAsync<TEntity>();
         }
     }
 }
