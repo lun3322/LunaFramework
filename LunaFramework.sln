@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Dapper.Tests", "tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.MongoDb", "src\Luna.MongoDb\Luna.MongoDb.csproj", "{D45E37E9-F009-4D66-ABC4-31ABEF089E61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.MongoDb.Tests", "tests\Luna.MongoDb.Tests\Luna.MongoDb.Tests.csproj", "{77540C2B-6E30-4309-8925-240946A09165}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{D45E37E9-F009-4D66-ABC4-31ABEF089E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D45E37E9-F009-4D66-ABC4-31ABEF089E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D45E37E9-F009-4D66-ABC4-31ABEF089E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77540C2B-6E30-4309-8925-240946A09165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77540C2B-6E30-4309-8925-240946A09165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77540C2B-6E30-4309-8925-240946A09165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77540C2B-6E30-4309-8925-240946A09165}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{0810CD7F-3045-407F-ACBE-8E3419D40887} = {728B51ED-B227-4CC8-94E7-379BFB17CC61}
 		{3CA610C4-1930-4AE4-9B74-32FC5FFA1827} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 		{D45E37E9-F009-4D66-ABC4-31ABEF089E61} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
+		{77540C2B-6E30-4309-8925-240946A09165} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B76D42F-3CEF-4DB9-9960-27AE2EC91B8F}

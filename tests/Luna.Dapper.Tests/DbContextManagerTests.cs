@@ -1,5 +1,7 @@
 ﻿using Castle.Core.Configuration;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
@@ -22,6 +24,18 @@ namespace Luna.Dapper.Tests
             connectionString.Should().Be(returnValue);
 
             mock.Verify();
+        }
+
+        [Fact]
+        public void ContainerShouldContainManagerWhenAddLuna()
+        {
+            var hostBuilder = new HostBuilder();
+            hostBuilder.ConfigureWebHostDefaults(m => { m.ConfigureServices(services => { LunaStarter.StartUp<LunaDapperTestsModule>(services); }); });
+            var build = hostBuilder.Build();
+
+            var provider = build.Services;
+            var contextManager = provider.GetService<ILunaDbContextManager>();
+            contextManager.Should().NotBeNull();
         }
     }
 }
