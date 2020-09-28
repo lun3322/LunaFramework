@@ -15,14 +15,17 @@ namespace Luna.Linq.Extensions
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="keySelector"></param>
+        /// <param name="desc"></param>
         /// <returns></returns>
         public static IQueryable<TSource> Paging<TSource, TKey>(this IQueryable<TSource> source,
             int pageIndex,
             int pageSize,
-            Expression<Func<TSource, TKey>> keySelector)
+            Expression<Func<TSource, TKey>> keySelector,
+            bool desc = true)
         {
             var linq = source;
-            linq = linq.OrderByDescending(keySelector);
+            linq = desc ? linq.OrderByDescending(keySelector) : linq.OrderBy(keySelector);
+
             if (pageIndex > 1)
             {
                 var skipCount = (pageIndex - 1) * pageSize;
