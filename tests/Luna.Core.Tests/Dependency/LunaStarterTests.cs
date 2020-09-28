@@ -16,7 +16,7 @@ namespace Luna.Core.Tests.Dependency
         public LunaStarterTests()
         {
             var serviceCollection = new ServiceCollection();
-            var starter = LunaStarter.StartUp<TestModuleEntryModule>(serviceCollection);
+            LunaStarter.StartUp<TestModuleEntryModule>(serviceCollection);
 
             _provider = serviceCollection.BuildServiceProvider();
         }
@@ -81,8 +81,8 @@ namespace Luna.Core.Tests.Dependency
 
             provider.GetService<ILunaDbContextManager>().Should().NotBeNull();
             provider.GetService<ILunaMongoDbClientManager>().Should().NotBeNull();
-            provider.GetService<LunaExceptionFilter>().Should().NotBeNull();
-            provider.GetService<ModelVerificationFilter>().Should().NotBeNull();
+            provider.GetService<LunaExceptionFilterAttribute>().Should().NotBeNull();
+            provider.GetService<ModelVerificationFilterAttribute>().Should().NotBeNull();
             provider.GetService<ISnowflakeIdProvider>().Should().NotBeNull();
         }
     }

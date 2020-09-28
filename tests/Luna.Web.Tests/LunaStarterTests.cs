@@ -27,8 +27,8 @@ namespace Luna.Web.Tests
 
             provider.GetService<ILunaDbContextManager>().Should().NotBeNull();
             provider.GetService<ILunaMongoDbClientManager>().Should().NotBeNull();
-            provider.GetService<LunaExceptionFilter>().Should().NotBeNull();
-            provider.GetService<ModelVerificationFilter>().Should().NotBeNull();
+            provider.GetService<LunaExceptionFilterAttribute>().Should().NotBeNull();
+            provider.GetService<ModelVerificationFilterAttribute>().Should().NotBeNull();
             provider.GetService<ISnowflakeIdProvider>().Should().NotBeNull();
         }
     }

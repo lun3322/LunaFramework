@@ -1,9 +1,7 @@
 using System;
-using System.Linq;
 using FluentAssertions;
 using Luna.Web.Mvc.Filters;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -11,23 +9,22 @@ namespace Luna.Web.Tests
 {
     public class LunaServiceCollectionExtensions
     {
-        private IServiceProvider _provider;
-        private IWebHost _webHost;
-        private IWebHostBuilder _webHostBuilder;
+        private readonly IServiceProvider _provider;
+        private readonly IWebHostBuilder _webHostBuilder;
 
         public LunaServiceCollectionExtensions()
         {
             var builder = new WebHostBuilder();
             builder.ConfigureServices(service => { service.AddLuna<LunaWebTestsModule>(); });
             _webHostBuilder = builder.Configure(app => { });
-            _webHost = builder.Build();
-            _provider = _webHost.Services;
+            var webHost = builder.Build();
+            _provider = webHost.Services;
         }
 
         [Fact]
         public void AddLunaShouldContainLunaModelVerificationFilter()
         {
-            var filter = _provider.GetService<ModelVerificationFilter>();
+            var filter = _provider.GetService<ModelVerificationFilterAttribute>();
 
             filter.Should().NotBeNull();
         }
@@ -35,7 +32,7 @@ namespace Luna.Web.Tests
         [Fact]
         public void AddLunaShouldContainLunaExceptionFilter()
         {
-            var filter = _provider.GetService<LunaExceptionFilter>();
+            var filter = _provider.GetService<LunaExceptionFilterAttribute>();
 
             filter.Should().NotBeNull();
         }

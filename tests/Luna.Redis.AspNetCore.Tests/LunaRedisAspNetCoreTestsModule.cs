@@ -1,15 +1,12 @@
 ﻿using Luna.Dependency;
-using Luna.Web;
 using Microsoft.Extensions.DependencyInjection;
-using Sample.Core;
 
-namespace Sample.Web
+namespace Luna.Redis.AspNetCore.Tests
 {
     [Dependency(
-        typeof(LunaWebModule),
-        typeof(SampleCoreModule)
+        typeof(LunaRedisAspNetCoreModule)
     )]
-    public class SampleWebModule : LunaModule
+    public class LunaRedisAspNetCoreTestsModule : LunaModule
     {
         public override void ConfigureServices(IServiceCollection services)
         {

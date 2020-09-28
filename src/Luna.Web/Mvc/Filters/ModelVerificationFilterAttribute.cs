@@ -11,13 +11,9 @@ namespace Luna.Web.Mvc.Filters
     /// <summary>
     ///     模型验证
     /// </summary>
-    public class ModelVerificationFilter : IActionFilter, IScopedDependency
+    public class ModelVerificationFilterAttribute : ActionFilterAttribute, IScopedDependency
     {
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
-
-        public void OnActionExecuting(ActionExecutingContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
             // todo 判断参数是对象类型
             if (context.ModelState.IsValid) return;

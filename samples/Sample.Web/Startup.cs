@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Luna.Redis.AspNetCore;
 using Luna.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,16 +22,18 @@ namespace Sample.Web
         {
             services.AddControllers();
 
-            services.AddLuna<SampleWebModule>(opt => { opt.EnableLunaModelValid = false; });
+            services.AddLuna<SampleWebModule>(opt =>
+            {
+                opt.EnableLunaModelValid = false;
+                opt.RedisConfig().ConnectionString = "localhost:6379";
+                opt.RedisConfig().Database = 5;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseRouting();
 

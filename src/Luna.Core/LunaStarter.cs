@@ -27,11 +27,11 @@ namespace Luna
             InitializeModule(allModule);
         }
 
-        public static LunaStarter StartUp<T>(IServiceCollection services, Action<LunaStarterOption> action = null, bool isRun = false)
+        public static LunaStarter StartUp<T>(IServiceCollection services, Action<LunaStarterOption> action = null)
             where T : LunaModule
         {
             var option = new LunaStarterOption();
-            if (isRun) action?.Invoke(option);
+            action?.Invoke(option);
 
             var start = new LunaStarter(services, typeof(T), option);
             services.AddSingleton(typeof(LunaStarter), start);
@@ -53,7 +53,10 @@ namespace Luna
             foreach (var module in moduleList)
             {
                 var instance = Activator.CreateInstance(module) as LunaModule;
-                if (instance == null) throw new Exception($"Can't instantiation type {module.FullName}");
+                if (instance == null)
+                {
+                    throw new Exception($"Can't instantiation type {module.FullName}");
+                }
 
                 instance.ConfigureServices(_serviceCollection);
             }

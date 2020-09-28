@@ -12,11 +12,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Luna.Web.Mvc.Filters
 {
-    public class LunaExceptionFilter : ExceptionFilterAttribute, IScopedDependency
+    public class LunaExceptionFilterAttribute : ExceptionFilterAttribute, IScopedDependency
     {
-        private readonly ILogger<LunaExceptionFilter> _logger;
+        private readonly ILogger<LunaExceptionFilterAttribute> _logger;
 
-        public LunaExceptionFilter(ILogger<LunaExceptionFilter> logger)
+        public LunaExceptionFilterAttribute(ILogger<LunaExceptionFilterAttribute> logger)
         {
             _logger = logger;
         }

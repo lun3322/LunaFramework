@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Luna.Caching
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4457:Parameter validation in \"async\"/\"await\" methods should be wrapped", Justification = "<挂起>")]
     public class DefaultLunaCaching : ILunaCaching
     {
         private readonly HashSet<string> _cacheKeys;
@@ -81,6 +82,13 @@ namespace Luna.Caching
             return item;
         }
 
+        public T Get<T>(string cacheKey) where T : class
+        {
+            if (cacheKey == null) throw new ArgumentNullException(nameof(cacheKey));
+
+            return _memoryCache.Get<T>(cacheKey);
+        }
+
         public async Task<T> GetAsync<T>(string cacheKey, Func<Task<T>> func) where T : class
         {
             if (cacheKey == null) throw new ArgumentNullException(nameof(cacheKey));
@@ -101,13 +109,6 @@ namespace Luna.Caching
             await SetAsync(cacheKey, item, expiration);
 
             return item;
-        }
-
-        public T Get<T>(string cacheKey) where T : class
-        {
-            if (cacheKey == null) throw new ArgumentNullException(nameof(cacheKey));
-
-            return _memoryCache.Get<T>(cacheKey);
         }
 
         public async Task<T> GetAsync<T>(string cacheKey) where T : class

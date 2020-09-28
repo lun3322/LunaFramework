@@ -81,16 +81,16 @@ namespace Luna.Dapper.Repository
             dbConnection.Delete(entity);
         }
 
-        public async Task DeleteAsync(TEntity entity)
-        {
-            using var dbConnection = GetConnection();
-            await dbConnection.DeleteAsync(entity);
-        }
-
         public void Delete(TPrimaryKey id)
         {
             using var dbConnection = GetConnection();
             dbConnection.Delete(new TEntity {Id = id});
+        }
+
+        public async Task DeleteAsync(TEntity entity)
+        {
+            using var dbConnection = GetConnection();
+            await dbConnection.DeleteAsync(entity);
         }
 
         public async Task DeleteAsync(TPrimaryKey id)

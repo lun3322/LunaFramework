@@ -8,7 +8,7 @@
             PageSize = 15;
         }
 
-        public RequestPaged(int pageIndex = 1, int pageSize = 15)
+        public RequestPaged(int pageIndex, int pageSize = 15)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;

@@ -29,7 +29,10 @@ namespace Luna.Dapper
         public static (List<T> data, int count) GetPagedList<T>(this IDbConnection connection, string selectSql, string conditionSql, string sortField,
             object param, IDbTransaction transaction = null)
         {
-            if (!(param is RequestPaged)) throw new Exception($"{nameof(param)}参数类型错误");
+            if (!(param is RequestPaged))
+            {
+                throw new ArgumentException($"{nameof(param)}参数类型错误");
+            }
 
             var sql = $@"
 {GetPagedSql(selectSql, conditionSql, sortField)}
@@ -55,7 +58,10 @@ namespace Luna.Dapper
         public static (List<T> data, int count) GetPagedList<T>(this IDbConnection connection, string selectSql, string sortField,
             object param, IDbTransaction transaction = null)
         {
-            if (!(param is RequestPaged)) throw new Exception($"{nameof(param)}参数类型错误");
+            if (!(param is RequestPaged))
+            {
+                throw new ArgumentException($"{nameof(param)}参数类型错误");
+            }
 
             var countSql = REPLACE_SELECT_SQL_TO_COUNT_SQL.Replace(selectSql, "SELECT COUNT(1) FROM");
 

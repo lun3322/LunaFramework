@@ -11,37 +11,41 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EF8771BD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B9033F1-733E-4A5A-9C4C-8F3B034F286B}"
 	ProjectSection(SolutionItems) = preProject
-		common.props = common.props
-		README.md = README.md
 		.travis.yml = .travis.yml
-		publishToNuget.bat = publishToNuget.bat
-		publish2Nuget.sh = publish2Nuget.sh
 		buildpackage.bat = buildpackage.bat
+		common.props = common.props
+		publish2Nuget.sh = publish2Nuget.sh
+		publishToNuget.bat = publishToNuget.bat
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Web", "src\Luna.Web\Luna.Web.csproj", "{872AF27D-2F58-434E-AB72-7ED27BA3364F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Dapper", "src\Luna.Dapper\Luna.Dapper.csproj", "{B335F294-B631-435C-A5B9-DF3E337D4535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Core.Tests", "tests\Luna.Core.Tests\Luna.Core.Tests.csproj", "{C1623674-7EFD-4FEB-BC7B-B739F5CEBC48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Core.Tests", "tests\Luna.Core.Tests\Luna.Core.Tests.csproj", "{C1623674-7EFD-4FEB-BC7B-B739F5CEBC48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestModule.Core", "tests\TestModule.Core\TestModule.Core.csproj", "{DC009BE8-1B22-4C3C-8CB0-745FAB09480D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestModule.Core", "tests\TestModule.Core\TestModule.Core.csproj", "{DC009BE8-1B22-4C3C-8CB0-745FAB09480D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestModule.Entry", "tests\TestModule.Entry\TestModule.Entry.csproj", "{51E3F7F5-C526-4E53-A844-A45390D2776E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestModule.Entry", "tests\TestModule.Entry\TestModule.Entry.csproj", "{51E3F7F5-C526-4E53-A844-A45390D2776E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{728B51ED-B227-4CC8-94E7-379BFB17CC61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Web.Tests", "tests\Luna.Web.Tests\Luna.Web.Tests.csproj", "{C3E80EE1-0084-4662-B361-849E52D7A6B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Web.Tests", "tests\Luna.Web.Tests\Luna.Web.Tests.csproj", "{C3E80EE1-0084-4662-B361-849E52D7A6B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Web", "samples\Sample.Web\Sample.Web.csproj", "{5A9708DC-871E-4318-99BF-6BFEB752E6AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Web", "samples\Sample.Web\Sample.Web.csproj", "{5A9708DC-871E-4318-99BF-6BFEB752E6AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Core", "samples\Sample.Core\Sample.Core.csproj", "{0810CD7F-3045-407F-ACBE-8E3419D40887}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Core", "samples\Sample.Core\Sample.Core.csproj", "{0810CD7F-3045-407F-ACBE-8E3419D40887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Dapper.Tests", "tests\Luna.Dapper.Tests\Luna.Dapper.Tests.csproj", "{3CA610C4-1930-4AE4-9B74-32FC5FFA1827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.Dapper.Tests", "tests\Luna.Dapper.Tests\Luna.Dapper.Tests.csproj", "{3CA610C4-1930-4AE4-9B74-32FC5FFA1827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.MongoDb", "src\Luna.MongoDb\Luna.MongoDb.csproj", "{D45E37E9-F009-4D66-ABC4-31ABEF089E61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.MongoDb", "src\Luna.MongoDb\Luna.MongoDb.csproj", "{D45E37E9-F009-4D66-ABC4-31ABEF089E61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.MongoDb.Tests", "tests\Luna.MongoDb.Tests\Luna.MongoDb.Tests.csproj", "{77540C2B-6E30-4309-8925-240946A09165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luna.MongoDb.Tests", "tests\Luna.MongoDb.Tests\Luna.MongoDb.Tests.csproj", "{77540C2B-6E30-4309-8925-240946A09165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Redis.AspNetCore", "src\Luna.Redis.AspNetCore\Luna.Redis.AspNetCore.csproj", "{3F01F6D7-9A27-4C97-A9C2-91F3DAE770EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Redis.AspNetCore.Tests", "tests\Luna.Redis.AspNetCore.Tests\Luna.Redis.AspNetCore.Tests.csproj", "{452E9E2B-16D1-40F7-8741-657C1053A49A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,14 @@ Global
 		{77540C2B-6E30-4309-8925-240946A09165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77540C2B-6E30-4309-8925-240946A09165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77540C2B-6E30-4309-8925-240946A09165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F01F6D7-9A27-4C97-A9C2-91F3DAE770EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F01F6D7-9A27-4C97-A9C2-91F3DAE770EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F01F6D7-9A27-4C97-A9C2-91F3DAE770EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F01F6D7-9A27-4C97-A9C2-91F3DAE770EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{452E9E2B-16D1-40F7-8741-657C1053A49A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452E9E2B-16D1-40F7-8741-657C1053A49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452E9E2B-16D1-40F7-8741-657C1053A49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452E9E2B-16D1-40F7-8741-657C1053A49A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +126,8 @@ Global
 		{3CA610C4-1930-4AE4-9B74-32FC5FFA1827} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 		{D45E37E9-F009-4D66-ABC4-31ABEF089E61} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
 		{77540C2B-6E30-4309-8925-240946A09165} = {EF8771BD-6EC8-443F-8289-E4901A635086}
+		{3F01F6D7-9A27-4C97-A9C2-91F3DAE770EC} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
+		{452E9E2B-16D1-40F7-8741-657C1053A49A} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B76D42F-3CEF-4DB9-9960-27AE2EC91B8F}

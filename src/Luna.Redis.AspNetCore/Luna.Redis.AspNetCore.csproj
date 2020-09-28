@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+		<PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="6.3.5" />
+		<PackageReference Include="StackExchange.Redis.Extensions.System.Text.Json" Version="6.3.5" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Luna.Core\Luna.Core.csproj" />
+		<ProjectReference Include="..\Luna.Web\Luna.Web.csproj" />
+	</ItemGroup>
+
+</Project>

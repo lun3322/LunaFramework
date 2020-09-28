@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using Luna.Application.Dto;
 using Luna.Exceptions;
 using Microsoft.AspNetCore.Mvc;
@@ -10,17 +11,19 @@ namespace Sample.Web.Controllers
     [Route("api/demo")]
     public class DemoController : Controller
     {
+        private readonly IRedisService _redisService;
         private readonly ISampleService _sampleService;
 
-        public DemoController(ISampleService sampleService)
+        public DemoController(ISampleService sampleService, IRedisService redisService)
         {
             _sampleService = sampleService;
+            _redisService = redisService;
         }
 
         [HttpGet("success")]
         public ResponseVm Success()
         {
-            return ResponseVm.Success("ok");
+            return ResponseVm.Success();
         }
 
         [HttpGet("error")]
@@ -32,13 +35,20 @@ namespace Sample.Web.Controllers
         [HttpPost("model")]
         public ResponseVm Model([FromBody] CustomModel model)
         {
-            return ResponseVm.Success("ok");
+            return ResponseVm.Success();
         }
 
         [HttpGet("sample")]
         public ResponseVm Sample()
         {
             var message = _sampleService.GetMessage();
+            return ResponseVm.Success(message);
+        }
+
+        [HttpGet("redis1")]
+        public async Task<ResponseVm> Redis1()
+        {
+            var message = await _redisService.GetOrAddMessageInRedis();
             return ResponseVm.Success(message);
         }
     }

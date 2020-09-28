@@ -38,6 +38,11 @@ namespace Luna.Caching
         T Get<T>(string cacheKey, Func<T> func) where T : class;
 
         /// <summary>
+        ///     获取一个缓存
+        /// </summary>
+        T Get<T>(string cacheKey) where T : class;
+
+        /// <summary>
         ///     获取一个缓存,不存在时使用func返回值设置并返回
         /// </summary>
         T Get<T>(string cacheKey, Func<T> func, TimeSpan expiration) where T : class;
@@ -53,11 +58,6 @@ namespace Luna.Caching
         /// </summary>
         Task<T> GetAsync<T>(string cacheKey, Func<Task<T>> func, TimeSpan expiration)
             where T : class;
-
-        /// <summary>
-        ///     获取一个缓存
-        /// </summary>
-        T Get<T>(string cacheKey) where T : class;
 
         /// <summary>
         ///     获取一个缓存

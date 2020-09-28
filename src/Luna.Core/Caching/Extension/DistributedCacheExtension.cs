@@ -19,6 +19,32 @@ namespace Luna.Caching.Extension
             return default(T);
         }
 
+        public static T Get<T>(this IDistributedCache distributedCache, string key, Func<T> func, DistributedCacheEntryOptions options = null)
+        {
+            var item = distributedCache.Get<T>(key);
+            if (item != null)
+            {
+                return item;
+            }
+
+            item = func.Invoke();
+            distributedCache.Set(key, item, options);
+            return item;
+        }
+
+        public static async Task<T> GetAsync<T>(this IDistributedCache distributedCache, string key, Func<Task<T>> func, DistributedCacheEntryOptions options = null)
+        {
+            var item = await distributedCache.GetAsync<T>(key);
+            if (item != null)
+            {
+                return item;
+            }
+
+            item = await func.Invoke();
+            await distributedCache.SetAsync(key, item, options);
+            return item;
+        }
+
         public static async Task<T> GetAsync<T>(this IDistributedCache distributedCache, string key)
         {
             var jsonString = await distributedCache.GetStringAsync(key);
@@ -48,32 +74,6 @@ namespace Luna.Caching.Extension
             var jsonString = JsonSerializer.Serialize(value);
             var opt = options ?? new DistributedCacheEntryOptions();
             return distributedCache.SetStringAsync(key, jsonString, opt);
-        }
-
-        public static T Get<T>(this IDistributedCache distributedCache, string key, Func<T> func, DistributedCacheEntryOptions options = null)
-        {
-            var item = distributedCache.Get<T>(key);
-            if (item != null)
-            {
-                return item;
-            }
-
-            item = func.Invoke();
-            distributedCache.Set(key, item, options);
-            return item;
-        }
-
-        public static async Task<T> GetAsync<T>(this IDistributedCache distributedCache, string key, Func<Task<T>> func, DistributedCacheEntryOptions options = null)
-        {
-            var item = await distributedCache.GetAsync<T>(key);
-            if (item != null)
-            {
-                return item;
-            }
-
-            item = await func.Invoke();
-            await distributedCache.SetAsync(key, item, options);
-            return item;
         }
     }
 }

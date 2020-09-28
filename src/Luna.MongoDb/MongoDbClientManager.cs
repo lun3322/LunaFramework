@@ -30,7 +30,7 @@ namespace Luna.MongoDb
             var url = _configuration.GetSection(MONGODB_URL_SECTION_KEY).Value;
             if (url.IsNullOrWhiteSpace())
             {
-                throw new Exception($"Please configure the {MONGODB_URL_SECTION_KEY} section");
+                throw new ArgumentNullException($"Please configure the {MONGODB_URL_SECTION_KEY} section");
             }
 
             var mongoClient = new MongoClient(url);
@@ -43,7 +43,7 @@ namespace Luna.MongoDb
             var db = database ?? _configuration.GetSection(MONGODB_DATABASE_SECTION_KEY).Value;
             if (db.IsNullOrWhiteSpace())
             {
-                throw new Exception($"Please configure the {MONGODB_DATABASE_SECTION_KEY} section or set {nameof(database)} arguments");
+                throw new ArgumentNullException($"Please configure the {MONGODB_DATABASE_SECTION_KEY} section or set {nameof(database)} arguments");
             }
 
             return client.GetDatabase(db);

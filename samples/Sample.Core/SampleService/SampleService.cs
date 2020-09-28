@@ -1,5 +1,4 @@
-﻿using Luna.Application;
-using Luna.Dapper;
+﻿using Luna.Dapper;
 
 namespace Sample.Core.SampleService
 {

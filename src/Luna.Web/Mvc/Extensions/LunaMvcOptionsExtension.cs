@@ -11,14 +11,14 @@ namespace Luna.Web.Mvc.Extensions
             if (option.EnableLunaGlobalExceptionHandle)
             {
                 // 全局异常处理
-                @this.Filters.Add<LunaExceptionFilter>();
+                @this.Filters.Add<LunaExceptionFilterAttribute>();
             }
 
             if (option.EnableLunaModelValid)
             {
                 // 为了启用全局模型验证
                 services.Configure<ApiBehaviorOptions>(o => { o.SuppressModelStateInvalidFilter = true; });
-                @this.Filters.Add<ModelVerificationFilter>();
+                @this.Filters.Add<ModelVerificationFilterAttribute>();
             }
         }
     }
