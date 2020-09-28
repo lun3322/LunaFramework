@@ -6,6 +6,7 @@ Install-Package Luna
 Install-Package Luna.Web
 Install-Package Luna.Dapper
 Install-Package Luna.MongoDb
+Install-Package Luna.Redis.AspNetCore
 ```
 
 ## 关于使用
