@@ -24,7 +24,6 @@ namespace Sample.Web
 
             services.AddLuna<SampleWebModule>(opt =>
             {
-                opt.EnableLunaModelValid = false;
                 opt.RedisConfig().ConnectionString = "localhost:6379";
                 opt.RedisConfig().Database = 5;
             });
