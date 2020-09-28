@@ -6,6 +6,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Luna.Core\Luna.Core.csproj" />
+      <ProjectReference Include="..\..\src\Luna.Dapper\Luna.Dapper.csproj" />
+      <ProjectReference Include="..\..\src\Luna.MongoDb\Luna.MongoDb.csproj" />
+      <ProjectReference Include="..\..\src\Luna.Web\Luna.Web.csproj" />
       <ProjectReference Include="..\TestModule.Core\TestModule.Core.csproj" />
     </ItemGroup>
 

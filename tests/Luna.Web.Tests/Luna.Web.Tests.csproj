@@ -16,7 +16,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Luna.Dapper\Luna.Dapper.csproj" />
+      <ProjectReference Include="..\..\src\Luna.MongoDb\Luna.MongoDb.csproj" />
       <ProjectReference Include="..\..\src\Luna.Web\Luna.Web.csproj" />
+      <ProjectReference Include="..\TestModule.Entry\TestModule.Entry.csproj" />
     </ItemGroup>
 
 </Project>

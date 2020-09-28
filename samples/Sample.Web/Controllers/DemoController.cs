@@ -3,12 +3,20 @@ using System.ComponentModel.DataAnnotations;
 using Luna.Application.Dto;
 using Luna.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Sample.Core.SampleService;
 
 namespace Sample.Web.Controllers
 {
     [Route("api/demo")]
     public class DemoController : Controller
     {
+        private readonly ISampleService _sampleService;
+
+        public DemoController(ISampleService sampleService)
+        {
+            _sampleService = sampleService;
+        }
+
         [HttpGet("success")]
         public ResponseVm Success()
         {
@@ -25,6 +33,13 @@ namespace Sample.Web.Controllers
         public ResponseVm Model([FromBody] CustomModel model)
         {
             return ResponseVm.Success("ok");
+        }
+
+        [HttpGet("sample")]
+        public ResponseVm Sample()
+        {
+            var message = _sampleService.GetMessage();
+            return ResponseVm.Success(message);
         }
     }
 

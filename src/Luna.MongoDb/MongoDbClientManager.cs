@@ -6,13 +6,13 @@ using MongoDB.Driver;
 
 namespace Luna.MongoDb
 {
-    public class MongoDbClientManager : IScopedDependency, IMongoDbClientManager
+    public class LunaMongoDbClientManager : IScopedDependency, ILunaMongoDbClientManager
     {
         private readonly IConfiguration _configuration;
         private const string MONGODB_URL_SECTION_KEY = "MongoDb:Url";
         private const string MONGODB_DATABASE_SECTION_KEY = "MongoDb:Database";
 
-        public MongoDbClientManager(IConfiguration configuration)
+        public LunaMongoDbClientManager(IConfiguration configuration)
         {
             _configuration = configuration;
         }

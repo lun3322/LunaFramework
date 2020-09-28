@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Luna.Core\Luna.Core.csproj" />
+      <ProjectReference Include="..\..\src\Luna.Dapper\Luna.Dapper.csproj" />
     </ItemGroup>
 
 </Project>

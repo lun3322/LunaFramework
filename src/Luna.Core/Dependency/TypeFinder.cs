@@ -25,32 +25,58 @@ namespace Luna.Dependency
 
         public static List<Type> FindModulesInAssemblyList(List<Assembly> assemblyList)
         {
-            var allModule = new List<Type>();
+            var allModule = new HashSet<Type>();
             foreach (var assembly in assemblyList)
             {
                 var modules = FindModuleInAssembly(assembly);
-                allModule.AddRange(modules);
+                modules.ForEach(m => allModule.Add(m));
             }
 
             return ModuleSorting(allModule);
         }
 
+        private static bool IsLunaModule(Type type)
+        {
+            return type.IsClass &&
+                   !type.IsGenericType &&
+                   !type.IsAbstract &&
+                   typeof(LunaModule).IsAssignableFrom(type);
+        }
+
         private static List<Type> FindModuleInAssembly(Assembly assembly)
         {
             var allTypes = assembly.GetTypes();
-            var moduleTypes = allTypes.Where(m => m.IsClass)
-                .Where(m => !m.IsGenericType)
-                .Where(m => !m.IsAbstract)
-                .Where(m => typeof(LunaModule).IsAssignableFrom(m))
+            var moduleTypes = allTypes.Where(IsLunaModule)
                 .ToList();
-            return moduleTypes;
+
+            var modules = new HashSet<Type>(moduleTypes);
+
+            foreach (var moduleType in moduleTypes)
+            {
+                var attributes = moduleType
+                    .GetCustomAttributes(typeof(DependencyAttribute), false)
+                    .Cast<DependencyAttribute>();
+
+                foreach (var dependencyAttribute in attributes)
+                {
+                    var dependencyTypes = dependencyAttribute.Types
+                        .Where(IsLunaModule)
+                        .ToList();
+                    dependencyTypes.ForEach(m => modules.Add(m));
+                }
+            }
+
+            return modules.ToList();
         }
 
-        private static List<Type> ModuleSorting(List<Type> allModule)
+        private static List<Type> ModuleSorting(IEnumerable<Type> allModule)
         {
             var graph = new DependencyGraph<Type>();
 
-            foreach (var module in allModule) new OrderedProcess<Type>(graph, module);
+            foreach (var module in allModule)
+            {
+                new OrderedProcess<Type>(graph, module);
+            }
 
             foreach (var process in graph.Processes)
             {
@@ -63,13 +89,19 @@ namespace Luna.Dependency
                     var processes = graph.Processes
                         .Where(m => dependencyAttribute.Types.Contains(m.Value))
                         .ToList();
-                    if (processes.Any()) process.After(processes);
+                    if (processes.Any())
+                    {
+                        process.After(processes);
+                    }
                 }
             }
 
             var sortedModule = new List<Type>();
             var calculateSort = graph.CalculateSort();
-            foreach (OrderedProcess<Type> orderedProcess in calculateSort) sortedModule.Add(orderedProcess.Value);
+            foreach (OrderedProcess<Type> orderedProcess in calculateSort)
+            {
+                sortedModule.Add(orderedProcess.Value);
+            }
 
             return sortedModule;
         }

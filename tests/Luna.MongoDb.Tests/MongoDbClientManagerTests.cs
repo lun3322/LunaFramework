@@ -16,7 +16,7 @@ namespace Luna.MongoDb.Tests
             var build = hostBuilder.Build();
 
             var provider = build.Services;
-            var contextManager = provider.GetService<IMongoDbClientManager>();
+            var contextManager = provider.GetService<ILunaMongoDbClientManager>();
             contextManager.Should().NotBeNull();
         }
     }

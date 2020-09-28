@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace Luna.Dapper
 {
-    public class LunaLunaDbContextManager : ILunaDbContextManager, IScopedDependency
+    public class LunaDbContextManager : ILunaDbContextManager, IScopedDependency
     {
         private readonly IConfiguration _configuration;
 
-        public LunaLunaDbContextManager(IConfiguration configuration)
+        public LunaDbContextManager(IConfiguration configuration)
         {
             _configuration = configuration;
         }

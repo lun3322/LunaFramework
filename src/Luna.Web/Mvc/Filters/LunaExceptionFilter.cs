@@ -23,7 +23,6 @@ namespace Luna.Web.Mvc.Filters
 
         public override void OnException(ExceptionContext context)
         {
-            _logger.LogError(context.Exception.ToString());
             if (!context.ActionDescriptor.IsControllerAction()) return;
 
             // 判断返回值类型
@@ -36,6 +35,7 @@ namespace Luna.Web.Mvc.Filters
                 return;
             }
 
+            _logger.LogError(context.Exception.ToString());
             context.Exception = null;
             context.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
             context.Result = new ObjectResult(new ResponseVm("服务器内部错误", 500));

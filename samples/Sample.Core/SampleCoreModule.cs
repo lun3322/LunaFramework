@@ -1,17 +1,14 @@
 ﻿using Luna;
 using Luna.Dapper;
 using Luna.Dependency;
-using Luna.Web;
 using Microsoft.Extensions.DependencyInjection;
-using Sample.Core;
 
-namespace Sample.Web
+namespace Sample.Core
 {
-    [Dependency(
-        typeof(LunaWebModule),
-        typeof(SampleCoreModule)
+    [Dependency(typeof(LunaCoreModule),
+        typeof(LunaDapperModule)
     )]
-    public class SampleWebModule : LunaModule
+    public class SampleCoreModule : LunaModule
     {
         public override void ConfigureServices(IServiceCollection services)
         {
