@@ -1,13 +1,12 @@
 # LunaFramework [![Build Status](https://travis-ci.com/lun3322/LunaFramework.svg?branch=master)](https://travis-ci.com/lun3322/LunaFramework)
 
-## 添加依赖
-```
-Install-Package Luna
-Install-Package Luna.Web
-Install-Package Luna.Dapper
-Install-Package Luna.MongoDb
-Install-Package Luna.Redis.AspNetCore
-```
+| 包 | 状态 |
+| ------- | ------------ |
+| [Luna](https://www.nuget.org/packages/Luna/)  | [![Luna](https://img.shields.io/nuget/v/Luna)](https://www.nuget.org/packages/Luna/) |
+| [Luna.Web](https://www.nuget.org/packages/Luna.Web/) | [![Luna.Web](https://img.shields.io/nuget/v/Luna.Web)](https://www.nuget.org/packages/Luna.Web/) |
+| [Luna.Dapper](https://www.nuget.org/packages/Luna.Dapper/) | [![Luna](https://img.shields.io/nuget/v/Luna.Dapper)](https://www.nuget.org/packages/Luna.Dapper/) |
+| [Luna.MongoDb](https://www.nuget.org/packages/Luna.MongoDb/) | [![Luna](https://img.shields.io/nuget/v/Luna.MongoDb)](https://www.nuget.org/packages/Luna.MongoDb/) |
+| [Luna.Redis.AspNetCore](https://www.nuget.org/packages/Luna.Redis.AspNetCore/) | [![Luna](https://img.shields.io/nuget/v/Luna.Redis.AspNetCore)](https://www.nuget.org/packages/Luna.Redis.AspNetCore/) |
 
 ## 关于使用
 1. 在Main方法中新增代码
