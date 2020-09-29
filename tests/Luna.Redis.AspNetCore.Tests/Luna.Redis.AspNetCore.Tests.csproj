@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Luna.Redis.AspNetCore\Luna.Redis.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Luna.Web\Luna.Web.csproj" />
   </ItemGroup>
 
 </Project>

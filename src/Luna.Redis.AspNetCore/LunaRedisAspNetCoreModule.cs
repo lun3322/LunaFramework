@@ -1,14 +1,12 @@
 ﻿using System;
 using Luna.Dependency;
-using Luna.Web;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis.Extensions.System.Text.Json;
 
 namespace Luna.Redis.AspNetCore
 {
     [Dependency(
-        typeof(LunaCoreModule),
-        typeof(LunaWebModule)
+        typeof(LunaCoreModule)
     )]
     public class LunaRedisAspNetCoreModule : LunaModule
     {
