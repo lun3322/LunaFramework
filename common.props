@@ -8,4 +8,5 @@
         <PackageOutputPath>..\..\package\</PackageOutputPath>
     </PropertyGroup>
 
+    <Import Project="analyzer.props" />
 </Project>

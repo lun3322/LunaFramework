@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\analyzer.props" />
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,10 +8,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\Luna.Core\Luna.Core.csproj" />
       <ProjectReference Include="..\..\src\Luna.Dapper\Luna.Dapper.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="SonarAnalyzer.CSharp" Version="8.13.1.21947" />
     </ItemGroup>
 
 </Project>
