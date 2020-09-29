@@ -10,4 +10,8 @@
       <ProjectReference Include="..\..\src\Luna.Redis.AspNetCore\Luna.Redis.AspNetCore.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="SonarAnalyzer.CSharp" Version="8.13.1.21947" />
+    </ItemGroup>
+
 </Project>

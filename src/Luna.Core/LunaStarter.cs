@@ -55,7 +55,7 @@ namespace Luna
                 var instance = Activator.CreateInstance(module) as LunaModule;
                 if (instance == null)
                 {
-                    throw new Exception($"Can't instantiation type {module.FullName}");
+                    throw new ArgumentNullException($"Can't instantiation type {module.FullName}");
                 }
 
                 instance.ConfigureServices(_serviceCollection);

@@ -14,10 +14,21 @@ namespace Luna.Extensions
             return Encoding.ASCII.GetString(Convert.FromBase64String(@this));
         }
 
+        public static string EncodeBase64(this string @this)
+        {
+            return Convert.ToBase64String(Activator.CreateInstance<ASCIIEncoding>().GetBytes(@this));
+        }
+
         public static string DecryptRsa(this string @this, string key)
         {
-            var cspp = new CspParameters {KeyContainerName = key};
-            var rsa = new RSACryptoServiceProvider(cspp) {PersistKeyInCsp = true};
+            var cspp = new CspParameters()
+            {
+                KeyContainerName = key
+            };
+            var rsa = new RSACryptoServiceProvider(2048, cspp)
+            {
+                PersistKeyInCsp = true,
+            };
             var decryptArray = @this.Split(new[] {"-"}, StringSplitOptions.None);
             var decryptByteArray = Array.ConvertAll(decryptArray, s => Convert.ToByte(byte.Parse(s, NumberStyles.HexNumber)));
             var bytes = rsa.Decrypt(decryptByteArray, true);
@@ -25,15 +36,16 @@ namespace Luna.Extensions
             return Encoding.UTF8.GetString(bytes);
         }
 
-        public static string EncodeBase64(this string @this)
-        {
-            return Convert.ToBase64String(Activator.CreateInstance<ASCIIEncoding>().GetBytes(@this));
-        }
-
         public static string EncryptRsa(this string @this, string key)
         {
-            var cspp = new CspParameters {KeyContainerName = key};
-            var rsa = new RSACryptoServiceProvider(cspp) {PersistKeyInCsp = true};
+            var cspp = new CspParameters
+            {
+                KeyContainerName = key
+            };
+            var rsa = new RSACryptoServiceProvider(2048, cspp)
+            {
+                PersistKeyInCsp = true
+            };
             var bytes = rsa.Encrypt(Encoding.UTF8.GetBytes(@this), true);
 
             return BitConverter.ToString(bytes);

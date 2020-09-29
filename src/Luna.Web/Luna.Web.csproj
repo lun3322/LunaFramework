@@ -1,16 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\..\common.props"/>
+    <Import Project="..\..\common.props" />
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Luna.Core\Luna.Core.csproj"/>
+        <ProjectReference Include="..\Luna.Core\Luna.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Mvc\Middleware"/>
+        <Folder Include="Mvc\Middleware" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SonarAnalyzer.CSharp" Version="8.13.1.21947" />
     </ItemGroup>
 
 </Project>

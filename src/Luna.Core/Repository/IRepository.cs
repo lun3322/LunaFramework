@@ -21,8 +21,8 @@ namespace Luna.Repository
         Task UpdateAsync(TEntity entity);
 
         void Delete(TEntity entity);
-        Task DeleteAsync(TEntity entity);
         void Delete(TPrimaryKey id);
+        Task DeleteAsync(TEntity entity);
         Task DeleteAsync(TPrimaryKey id);
 
         int Count();

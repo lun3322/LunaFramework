@@ -75,6 +75,7 @@ namespace Luna.Dependency
 
             foreach (var module in allModule)
             {
+                // ReSharper disable once S1848
                 new OrderedProcess<Type>(graph, module);
             }
 
