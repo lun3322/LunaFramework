@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Redis.AspNetCore", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Redis.AspNetCore.Tests", "tests\Luna.Redis.AspNetCore.Tests\Luna.Redis.AspNetCore.Tests.csproj", "{452E9E2B-16D1-40F7-8741-657C1053A49A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luna.Nlog.AspNetCore", "src\Luna.Nlog.AspNetCore\Luna.Nlog.AspNetCore.csproj", "{3A3CED37-C69A-4EF9-99A8-DFA248FAB291}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{452E9E2B-16D1-40F7-8741-657C1053A49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{452E9E2B-16D1-40F7-8741-657C1053A49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{452E9E2B-16D1-40F7-8741-657C1053A49A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A3CED37-C69A-4EF9-99A8-DFA248FAB291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A3CED37-C69A-4EF9-99A8-DFA248FAB291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A3CED37-C69A-4EF9-99A8-DFA248FAB291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A3CED37-C69A-4EF9-99A8-DFA248FAB291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +134,7 @@ Global
 		{77540C2B-6E30-4309-8925-240946A09165} = {EF8771BD-6EC8-443F-8289-E4901A635086}
 		{3F01F6D7-9A27-4C97-A9C2-91F3DAE770EC} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
 		{452E9E2B-16D1-40F7-8741-657C1053A49A} = {EF8771BD-6EC8-443F-8289-E4901A635086}
+		{3A3CED37-C69A-4EF9-99A8-DFA248FAB291} = {1009CB97-1A4C-414F-84A0-2DB1BBE31408}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B76D42F-3CEF-4DB9-9960-27AE2EC91B8F}
