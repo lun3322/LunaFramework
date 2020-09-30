@@ -7,6 +7,7 @@
 | [Luna.Dapper](https://www.nuget.org/packages/Luna.Dapper/) | [![Luna](https://img.shields.io/nuget/v/Luna.Dapper)](https://www.nuget.org/packages/Luna.Dapper/) |
 | [Luna.MongoDb](https://www.nuget.org/packages/Luna.MongoDb/) | [![Luna](https://img.shields.io/nuget/v/Luna.MongoDb)](https://www.nuget.org/packages/Luna.MongoDb/) |
 | [Luna.Redis.AspNetCore](https://www.nuget.org/packages/Luna.Redis.AspNetCore/) | [![Luna](https://img.shields.io/nuget/v/Luna.Redis.AspNetCore)](https://www.nuget.org/packages/Luna.Redis.AspNetCore/) |
+| [Luna.Nlog.AspNetCore](https://www.nuget.org/packages/Luna.Nlog.AspNetCore/) | [![Luna](https://img.shields.io/nuget/v/Luna.Nlog.AspNetCore)](https://www.nuget.org/packages/Luna.Nlog.AspNetCore/) |
 
 ## 关于使用
 1. 在Main方法中新增代码
@@ -38,7 +39,7 @@
 public void ConfigureServices(IServiceCollection services)
 {
     ...
-    services.AddLuna<SampleWebModule>(opt => { opt.EnableLunaModelValid = false; });
+    services.AddLuna<SampleWebModule>();
 }
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
