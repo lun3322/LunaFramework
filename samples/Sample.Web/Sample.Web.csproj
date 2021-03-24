@@ -2,13 +2,17 @@
     <Import Project="..\..\analyzer.props" />
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Luna.Redis.AspNetCore\Luna.Redis.AspNetCore.csproj" />
       <ProjectReference Include="..\..\src\Luna.Web\Luna.Web.csproj" />
       <ProjectReference Include="..\Sample.Core\Sample.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="SonarAnalyzer.CSharp" Version="8.20.0.28934" />
     </ItemGroup>
 
 

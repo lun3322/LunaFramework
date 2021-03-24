@@ -3,7 +3,7 @@
     <Import Project="..\..\common.props" />
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,9 +11,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dapper" Version="2.0.35" />
-        <PackageReference Include="Dapper.SimpleCRUD" Version="2.2.0.1" />
+        <PackageReference Include="Dapper" Version="2.0.78" />
+        <PackageReference Include="Dapper.SimpleCRUD" Version="2.3.0" />
         <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="SonarAnalyzer.CSharp" Version="8.20.0.28934" />
     </ItemGroup>
 
 </Project>
