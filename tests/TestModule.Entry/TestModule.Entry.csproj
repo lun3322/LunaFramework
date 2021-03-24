@@ -13,4 +13,8 @@
       <ProjectReference Include="..\TestModule.Core\TestModule.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Update="SonarAnalyzer.CSharp" Version="8.20.0.28934" />
+    </ItemGroup>
+
 </Project>

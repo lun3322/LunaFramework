@@ -7,12 +7,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="StackExchange.Redis" Version="2.1.58" />
-		<PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="6.3.5" />
-		<PackageReference Include="StackExchange.Redis.Extensions.System.Text.Json" Version="6.3.5" />
+		<PackageReference Include="StackExchange.Redis" Version="2.2.4" />
+		<PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="6.4.5" />
+		<PackageReference Include="StackExchange.Redis.Extensions.System.Text.Json" Version="6.4.5" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Luna.Core\Luna.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Update="SonarAnalyzer.CSharp" Version="8.20.0.28934" />
 	</ItemGroup>
 
 </Project>

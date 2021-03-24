@@ -10,4 +10,8 @@
       <ProjectReference Include="..\..\src\Luna.Dapper\Luna.Dapper.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Update="SonarAnalyzer.CSharp" Version="8.20.0.28934" />
+    </ItemGroup>
+
 </Project>
